@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+@import url(../_plugin/froala-editor/latest/css/froala_style.min.css);
+@import url(define.min.css);
+@import url(row-col.min.css);
+
+body { background: #fff; }
+
+html, body, div, span, iframe,
+h1, h2, h3, h4, h5, h6, p, pre,
+a, address,
+img,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas,
+footer, header,
+nav, section,
+audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+ol, ul {list-style-type:none;}
+a{color:inherit;text-decoration:none;}
+input:not([type="checkbox"]):not([type="radio"]), button{font-family:inherit;appearance:none;-webkit-appearance:none;-moz-appearance:none;}
+input[type="text"]{border-radius:0;}
+noscript, caption {width:0px;height:0px;text-indent:-20000px;}
+pre {font-family:inherit;white-space:pre;white-space:pre-wrap;white-space:pre-line;white-space:-pre-wrap;white-space:-o-pre-wrap;white-space:-moz-pre-wrap;white-space:-hp-pre-wrap;word-wrap:break-word;}
+ul.short-cut {position:absolute;top:-5000px;}
+img, input, select, textarea {vertical-align:middle;}
+.fr-view ol{padding-left:40px;list-style-type:decimal;}
+.fr-view ul{padding-left:40px;list-style-type:disc;}
+
+.hide { display: none !important; }
+.cmp-common { margin-top:5px; padding-left:5px; padding-right:5px;}
+.cmp-common:after { content: ' '; clear: both; display: table; }
+.widget-froala { position: relative; user-select: none; min-height: 22px; }
+.widget-froala.inline-block { display: inline-block ;}
+.widget-froala widget .garbage.mask {position: absolute !important;width: 100%;height: 100%;left: 0;top: 0; cursor: pointer; border: 1px dotted #c8e6ff; } /* froala mask */
+.widget-froala widget .garbage.mask:hover { border: 1px dotted #93cdff; }
+.widget-froala widget .garbage.mask:hover:after { content: attr(data-title); text-align: center; display: block; position: absolute; top: calc(50% - 10px); width: 100%; font-size: 14px; color: #b6c5d6; opacity: 0.6; }
+.widget-froala.widget-active widget .garbage.mask { border: 1px solid #93cdff; }
+.fr-video { text-align: center;  position: relative; }
+.fr-video.fr-dvb { display: block;  clear: both; }
+.fr-video>* { -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; max-width: 100%; border: 0;}
+.cms-front-edit { position: fixed; right: 0; bottom: 0; background-color: #000; border-top-left-radius: 4px; border-bottom-left-radius: 4px; list-style-type: none; opacity: 0.5; z-index:2000; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.16), 2px 4px 10px rgba(0, 0, 0, 0.12); font-family: nanumgothic; font-size:12px; color:#ffffff;}
+.cms-front-edit a{color:#ffffff;}
+.cms-front-edit.collpase a.front-edit, .cms-front-edit.editing a.front-edit, .cms-front-edit.collpase a.front-access { display: none; }
+.cms-front-edit.collpase a.show-hide-toggle i:before { content: '\f104'}
+
+.cms-front-edit.collpase a.front-edit-cancel, .cms-front-edit a.front-edit-cancel { display: none; }
+.cms-front-edit.editing:not(.collpase) a.front-edit-cancel { display: inline-block; padding: 9px 11px; cursor: pointer; }
+.cms-front-edit i { vertical-align: middle; font-size: 24px;}
+
+.cms-front-edit a.front-edit, .cms-front-edit a.front-access { display: inline-block; padding: 9px 11px; cursor: pointer;}
+.cms-front-edit a.front-edit, .cms-front-edit a.front-access i { vertical-align: middle; font-size: 24px;}
+.cms-front-edit a.show-hide-toggle { display: inline-block; padding:13px 6px 14px 8px; cursor: pointer;}
+.cms-front-edit a.show-hide-toggle i {vertical-align: middle; font-size: 14px;}
+.cms-edit-wrap { position: absolute; top:0; left:0; width: calc(100% - 2px); height: calc(100% - 2px); border: 1px dotted red; z-index: 100; background: #dfdada; opacity: 0.3; }
+.cms-edit-wrap:hover { opacity: 0.4; background: #1b6dba; cursor: pointer; }
+.front-content-edit {position: absolute; top: 10px; right: 10px; padding: 10px 8px 10px 12px; opacity: 1;border-radius: 30px; cursor: pointer; bottom: auto; line-height: 24px !important;}
+.front-content-edit i {vertical-align: middle; font-size: 24px;}
+.flash-map { display: none; }
+html.cms-iframe-manage, html.cms-iframe-manage body { height: auto !important; }
+
+#go_main { position: absolute; height:0; }
+#go_main a { display: block; left: -9000px; position: absolute; text-align: center; width: 400px; }
+#go_main a:focus, #go_main a:active, #go_main a:hover { background-color: #ffffff; color: black; left: 50%; padding: 5px 0; position: absolute; top: 10px; z-index: 1000000; border: 1px dotted red; }
+.input[type=password] {-webkit-ime-mode:inactive;-moz-ime-mode:inactive;-ms-ime-mode:inactive;ime-mode:inactive;}
