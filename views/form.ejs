@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>게시판 연습중</title>
-</head>
-<body>
-    <h1>이름</h1>
-      <p> <%= name %></p>
-    <h1>블로그</h1>
-        <p> <%= blog %></p>
-    <h1>홈페이지</h1>
-     <p> <%= homepage %></p>
-</body>
-</html
-<form id="Form" action="/form" method="post">
+<html lang="en">
+	<head>
+		<%- include ('./include/head.ejs') %>
+		
+	</head>
+	<body>
+		<header>
+		<%- include ('./include/header.ejs') %>
+	</header>
+
+
+<form id="Form" action="/form" method="post"style="margin-top: 100px;margin-right: 400px;margin-left: 300px;">
     <table width="400">
         <tr>
-            <th>이름</th>
+            <th style="width: 100px">이름</th>
             <td><input type="text" name="name" id="name" size="10" maxLength="10"></td> 
         </tr>
         <tr>
@@ -32,3 +30,10 @@
         </tr>
     </table>
 </form>
+
+<footer>
+    <%- include ('./include/footer.ejs') %>
+</footer>
+
+</body>
+</html>

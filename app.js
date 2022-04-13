@@ -35,6 +35,7 @@ const inforhistoryRouter = require("./routes/infor-history");
 const inforrecruitRouter = require("./routes/infor-recruit");
 const noticeoverviewRouter = require("./routes/notice-overview");
 const qnaRouter = require("./routes/qna");
+const profileRouter = require("./routes/profile");
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
@@ -57,5 +58,6 @@ app.use("/logout", logoutRouter);
 app.use("/infor-overview", inforoverviewRouter);
 app.use("/infor-history", inforhistoryRouter);
 app.use("/infor-recruit", inforrecruitRouter);
-app.use("/notice", noticeoverviewRouter);
 app.use("/qna", qnaRouter);
+app.use("/notice", noticeoverviewRouter);
+app.use("/profile", profileRouter);

@@ -16,3 +16,6 @@ router.post("/", function (req, res, next) {
 });
 
 module.exports = router; // 전역으로 해당 라우터를 사용하게해줌
+
+
+

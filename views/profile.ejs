@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include ('./include/index_head.ejs') %>
+</head>
+
+<body>
+    <div id="wrap">
+        <header>
+            <!-- main class mainHead -->
+            <%- include ('./include/header.ejs') %>
+        </header>
+
+        <div style="margin: 200px;">
+
+            id: <%= user %><br>
+            username: <%= userinfo.username %> <br>
+            phonenumber: <%= userinfo.phonenumber %>
+
+        </div>
+
+
+
+
+        <footer>
+            <%- include ('./include/footer.ejs') %>
+        </footer>
+
+
+
+    </div>
+
+</body>
+
+</html>
