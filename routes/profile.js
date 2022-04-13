@@ -13,7 +13,6 @@ const connection = mysql.createConnection({
 
 router.get('/', function (req, res) {
     let id = req.session.name;
-    console.log(id)
 
     connection.query("select * from users where id = ? ", [[[id]]], function (error, results, field) {
         if (error) { throw error; }
@@ -25,7 +24,7 @@ router.get('/', function (req, res) {
             );
         }
         else {
-            console.log(results)
+            console.log(results[0].id+"님이 /profile에 접속했습니다.")
             res.render('profile', {userinfo: results[0], user: req.session.name });
             
         }
@@ -38,4 +37,3 @@ router.get('/', function (req, res) {
 
 
 module.exports = router;
-
