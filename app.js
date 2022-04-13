@@ -34,7 +34,7 @@ const inforoverviewRouter = require("./routes/infor-overview");
 const inforhistoryRouter = require("./routes/infor-history");
 const inforrecruitRouter = require("./routes/infor-recruit");
 const noticeoverviewRouter = require("./routes/notice-overview");
-
+const qnaRouter = require("./routes/qna");
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
@@ -58,3 +58,4 @@ app.use("/infor-overview", inforoverviewRouter);
 app.use("/infor-history", inforhistoryRouter);
 app.use("/infor-recruit", inforrecruitRouter);
 app.use("/notice", noticeoverviewRouter);
+app.use("/qna", qnaRouter);
