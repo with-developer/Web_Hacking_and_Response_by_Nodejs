@@ -7,22 +7,25 @@ const path = require("path");
 const connection = mysql.createConnection({
 	host: "127.0.0.1",
 	user: "root",
-	password: "",
+	password: "sos7136@",
 	database: "vulnnode",
 });
 
-router.get("/", (req, res) => {
-	res.sendFile(path.join(__dirname, "..", "/public/signup.html"));
-});
+
+router.get('/', function(req,res){ // 2
+	res.render('signup', {name:req.query.nameQuery});
+  });
 
 router.post("/", (req, res) => {
+	let id = req.body.id;
 	let username = req.body.username;
 	let password = req.body.password;
 	let email = req.body.email;
-	if (username && password && email) {
+	let phoneNumber = req.body.phoneNumber;
+	if (id && username && password && email && phoneNumber) {
 		connection.query(
-			"INSERT INTO users (username, password, email) VALUES ?",
-			[[[username, password, email]]],
+			"INSERT INTO users (id, password, username, email, phoneNumber) VALUES ?",
+			[[[id, password, username, email, phoneNumber]]],
 			function (error, results, fields) {
 				if (error) throw error;
 				if (results.affectedRows > 0) {
@@ -44,12 +47,12 @@ router.post("/", (req, res) => {
 });
 
 router.post("/idcheck", (req, res) => {
-	const username = req.body.username;
+	const id = req.body.id;
 	let result = 0;
-	if (username) {
+	if (id) {
 		connection.query(
-			"SELECT * FROM users WHERE username = ?",
-			[[username]],
+			"SELECT * FROM users WHERE id = ?",
+			[[id]],
 			function (error, results, fields) {
 				if (error) throw error;
 				if (results.length == undefined || results.length < 1) {

@@ -71,7 +71,7 @@
 	<body>
 		<header><!-- main class mainHead -->
             <div class="inHeadBox">
-                <h1><a href="./main.html" title="로고" ><img src="./images/img_logo_head.png"></a></h1>
+                <h1><a href="./" title="로고" ><img src="./images/img_logo_head.png"></a></h1>
                 <button type="button" class="btn_allMenu" title="전체메뉴">
                     <span></span><span></span><span></span>
                 </button>
@@ -143,8 +143,8 @@
                     </ul>
 
                     <div class="rightQuickBox">
-                        <a href="./login.html" target="_blank" class="login"><img src="./images/ico_right_quick01.png" alt="로그인 아이콘">로그인</a>
-                        <a href="./signup.html" target="_blank" class="signup"><img src="./images/ico_right_quick02.png" alt="회원가입 아이콘">회원가입</a>
+                        <a href="./login" class="login"><img src="./images/ico_right_quick01.png" alt="로그인 아이콘">로그인</a>
+                        <a href="./signup" class="signup"><img src="./images/ico_right_quick02.png" alt="회원가입 아이콘">회원가입</a>
                     </div>
                 </nav>
             </div>
@@ -154,10 +154,10 @@
 				class="container-login100"
 				style="background-image: url('images/bg-01.jpg')"
 			>
-				<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+				<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33"  style="margin-top: 100px;">
 					<form
 						class="login100-form validate-form flex-sb flex-w"
-						action="/register"
+						action="/signup"
 						method="post"
 					>
 						<span class="login100-form-title p-b-53">
@@ -190,7 +190,16 @@
 								class="input100"
 								type="text"
 								name="id"
+								id="id"
 							/>
+							<div class="input-group-append">
+								<button
+									class="btn btn-outline-secondary"
+									id="idcheck_btn"
+								>
+									중복검사
+								</button>
+							</div>
 							<span class="focus-input100"></span>
 						</div>
 
@@ -297,5 +306,43 @@
                 </div>
             </div>
         </footer>
+		<script>
+			const id = document.getElementById("id");
+			const btn = document.getElementById("idcheck_btn");
+			if (btn) {
+				btn.addEventListener("click", clickHandler);
+			}
+
+			function clickHandler() {
+				const data = JSON.stringify({ id: id.value }); //JSON을 스트링으로 변환
+
+				// Ajax
+				const xhr = new XMLHttpRequest();
+				// Request method , URL 지정
+				xhr.open("POST", "/signup/idcheck", true); // 첫번째 인자값은 request method, 두번째 인자값은 url
+				// Request Header(요청헤더) 조작
+				xhr.setRequestHeader("Content-type", "application/json");
+				// Request Body에 데이터를 넣어서 보내기
+				xhr.send(data);
+
+				// xhr.send()에 의해 서버로 내용이 전달되고 응답을 건내받으면 아래의 콜백함수가 실행된다.
+				xhr.onreadystatechange = () => {
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						try {
+							// 가입가능 1 , 가입불가능 0
+							const { result } = JSON.parse(xhr.response);
+							if (result === 0)
+								throw new Error("에러가 발생했습니다.");
+							alert("사용가능한 아이디입니다!");
+
+						} catch (err) {
+							// 가입불가능
+							alert("중복된 아이디입니다!!");
+
+						}
+					}
+				};
+			}
+		</script>
 	</body>
 </html>

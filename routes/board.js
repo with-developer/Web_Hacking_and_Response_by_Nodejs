@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
 	// createConnection 데이터베이스 설정 입력
 	host: "127.0.0.1",
 	user: "root",
-	password: "",
+	password: "sos7136@",
 	database: "vulnnode",
 });
 

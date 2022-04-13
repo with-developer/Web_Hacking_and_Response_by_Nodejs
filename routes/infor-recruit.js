@@ -5,7 +5,7 @@ const path = require("path");
 
 
 router.get('/', function(req,res){ // 2
-	res.render('main', {user: req.session.name});
+	res.render('infor-recruit', {user: req.session.name});
   });
 
 

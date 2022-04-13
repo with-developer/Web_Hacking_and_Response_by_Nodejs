@@ -5,7 +5,7 @@ const mysql = require("mysql2");
 const connection = mysql.createConnection({
 	host: "127.0.0.1",
 	user: "root",
-	password: "",
+	password: "sos7136@",
 	database: "vulnnode",
 });
 
@@ -24,8 +24,13 @@ const filterStrings = [
 	"alter",
 ];
 
+router.get('/', function(req,res){ // 2
+	res.render('login', {name:req.query.nameQuery, user: req.session.name});
+  });
+
+
 router.post("/", (req, res) => {
-	let username = req.body.username;
+	let id = req.body.id;
 	let password = req.body.password;
 	let attack = 0;
 	for (var i = 0; i < filterStrings.length; i++) {
@@ -33,22 +38,22 @@ router.post("/", (req, res) => {
 			attack = 1;
 		}
 	}
-	if (username && password) {
+	if (id && password) {
 		if (attack) {
 			res.send(
 				"<script>alert('DB테이블 공격하지마세요!!');history.back();</script>"
 			);
 		} else {
 			connection.query(
-				"SELECT * FROM users WHERE username = ? AND password = " +
+				"SELECT * FROM users WHERE id = ? AND password = " +
 					`'${password}'`,
-				[username, password],
+				[id, password],
 				function (error, results, fields) {
 					if (results == undefined) {
 						res.send(error);
 					} else if (results.length > 0) {
 						req.session.loggedin = true;
-						req.session.username = username;
+						req.session.name = id;
 						res.redirect("/");
 					} else {
 						res.send(
