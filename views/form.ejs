@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<%- include ('./include/head.ejs') %>
-		
-	</head>
-	<body>
-		<header>
-		<%- include ('./include/header.ejs') %>
-	</header>
+
+<head>
+    <%- include ('./include/head.ejs') %>
+
+</head>
+
+<body>
+    <header>
+        <%- include ('./include/header.ejs') %>
+    </header>
 
 
-<form id="Form" action="/form" method="post"style="margin-top: 100px;margin-right: 400px;margin-left: 300px;">
-    <table width="400">
-        <tr>
-            <th style="width: 100px">이름</th>
-            <td><input type="text" name="name" id="name" size="10" maxLength="10"></td> 
-        </tr>
-        <tr>
-            <th>블로그</th>
-            <td><input type="text" name="name" id="name" size="10" maxLength="10"></td> 
-        </tr>
-        <tr>
-            <th>홈페이지</th>
-            <td><input type="text" name="name" id="name" size="10" maxLength="10"></td> 
-        </tr>
-        <tr>
-            <th>전송</th>
-            <td><input type="submit"></td> 
-        </tr>
-    </table>
-</form>
+    <form id="Form" action="/form" method="post" style="margin-top: 100px;margin-right: 400px;margin-left: 300px;">
+        <table width="400">
+            <tr>
+                <th>제목</th>
+                <td><input type="text" name="title" id="title" size="10" maxLength="30"></td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td><textarea name="content" id="content" cols="200" rows="5" style="height: 400px;"></textarea></td>
+            </tr>
+            <tr>
+                <th>전송</th>
+                <td><input type="submit"></td>
+            </tr>
+        </table>
+    </form>
 
-<footer>
-    <%- include ('./include/footer.ejs') %>
-</footer>
+    <footer>
+        <%- include ('./include/footer.ejs') %>
+    </footer>
 
 </body>
+
 </html>
