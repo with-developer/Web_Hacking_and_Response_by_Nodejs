@@ -1,42 +1,121 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title><%= title %></title>
-		<link rel="stylesheet" href="/stylesheets/style.css" />
-	</head>
-	<body>
-		<h1><%= title %></h1>
-		<a href="/board/write">글쓰기</a>
-		<table border="1">
-			<tr>
-				<td>번호</td>
-				<td>작성자</td>
-				<td>제목</td>
-				<td>조회수</td>
-				<td>수정일</td>
-				<td>등록일</td>
-			</tr>
-			<% for(var i = (page * page_num) - page_num; i < (page * page_num);
-			i++) { if(i > length){ i++; }else{ var data = rows[i] %>
-			<tr>
-				<td><%= i + 1 %></td>
-				<td><%= data.name %></td>
-				<td>
-					<a href="/board/read/<%= data.idx %>"><%= data.title %></a>
-				</td>
-				<td><%= data.hit %></td>
-				<td><%= data.modidate %></td>
-				<td><%= data.regdate %></td>
-			</tr>
-			<% } } %>
-			<tr>
-				<td colspan="6">
-					<% for(var j = 0; j < rows.length / page_num; j++){ %> [<a
-						href="/board/page/<%= j + 1 %>"
-						><%= j + 1 %></a
-					>] <% } %>
-				</td>
-			</tr>
-		</table>
-	</body>
+
+<head>
+    <%- include ('./include/head2.ejs') %>
+	<style>
+		table {
+		  width: 100%;
+		  border: 1px solid #444444;
+		  border-collapse: collapse;
+		}
+		th, td {
+		  border: 1px solid #444444;
+		}
+	  </style>
+</head>
+
+<body>
+
+    <div id="wrap">
+        <header>
+            <%- include ('./include/header.ejs') %>
+        </header>
+
+        <!-- location -->
+        <nav class="locationNav">
+            <ol>
+                <li><a href="./" title="홈 바로가기"></a></li>
+                <li><a href="./q&a-overview.html">Q&A</a></li>
+            </ol>
+        </nav>
+        <!-- // location -->
+
+        <!-- 서브 -->
+        <section class="subContainer">
+
+            <h2 class="titSub">Q&A</h2>
+            <div class="subContent">
+                <div>
+                    <!-- 지도 -->
+
+                    <div class="">
+
+                    </div>
+                    </h3>
+                </div>
+            </div>
+            <div class="sub-container">
+                <div class="content-wrap" style="margin: 30px;">
+                   
+
+
+                    <table border="1" style="border: 2px;font-size: 1.3em;">
+                        <tr>
+                            <td>번호</td>
+                            <td>작성자</td>
+                            <td>제목</td>
+                        </tr>
+                        <%
+                        for(var i = (page * page_num) - page_num; i < (page * page_num); i++) {
+                        if(i > length){
+                            i++;
+                        }else{
+                            var data = rows[i]
+                        %>
+                        <tr>
+                            <td><%= i + 1 %></td>
+                            <td><%= data.author %></td>
+                            <td><a href="/board/read/<%= data._id %>"><%= data.title %></a></td>
+                        </tr>
+                        <% }
+                        }
+                        %>
+                        <tr>
+                            <td colspan="6">
+                                <%
+                                for(var j = 0; j < rows.length / page_num; j++){
+                                %>
+                                [<a href="/board/page/<%= j + 1 %>"><%= j + 1 %></a>]
+                                <%
+                                }
+                                %>
+                            </td>
+                        </tr>
+                    </table>
+					<br><br>
+                    <button><a href="/board/form">글쓰기</a></button>
+
+                </div>
+            </div>
+        </section>
+        		<!--===============================================================================================-->
+		<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/animsition/js/animsition.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/bootstrap/js/popper.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/select2/select2.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/daterangepicker/moment.min.js"></script>
+		<script src="vendor/daterangepicker/daterangepicker.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/countdowntime/countdowntime.js"></script>
+		<!--===============================================================================================-->
+		<script src="js/main.js"></script>
+        <footer style="border-top: 1px solid #e2e2e2;
+        padding: 72px 0;
+        background-color: #303030;
+        color: #fff;
+        font-family: 'NanumSquareL';">
+            <%- include ('./include/footer.ejs') %>
+        </footer>
+
+
+
+    </div>
+</body>
+
 </html>
