@@ -18,10 +18,6 @@ router.post("/", function (req, res, next) {
 	var content = req.body.content;
 	var id = req.session.name;
 
-	console.log(title)
-	console.log(content)
-	console.log(id)
-
 	if (id === undefined) {
 		res.send(
 			"<script>alert('로그인 후 게시글을 작성하세요.');history.back();</script>"
