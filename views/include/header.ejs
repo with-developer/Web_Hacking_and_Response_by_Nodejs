@@ -68,10 +68,17 @@
 
             <div class="rightQuickBox">
                 
-                <div style="margin: 10px;font-size: 20px;"><a href="/profile"><%= user %></a>님 반갑습니다.</div>
+                <div style="margin: 10px;font-size: 20px;font-weight: 300;"><a href="/profile" style="border: 0; font-size: 25px; padding: 0;">
+                    <%= user %>
+                </a>님 반갑습니다.</div>
             
-                <a href="/logout" class="signup"><img src="/images/ico_right_quick02.png"
-                        alt="로그아웃 아이콘">로그아웃</a>
+                <a href="/logout" class="signup" style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
+                    <button type="button" class="btn btn-outline-dark"style="font-size: 18px;">
+                        로그아웃
+                    </button>
+                </a>
+                        
+                        
             </div>
             
           
@@ -80,6 +87,7 @@
             <div class="rightQuickBox">
                 <a href="/login" class="login"><img src="/images/ico_right_quick01.png"
                         alt="로그인 아이콘">로그인</a>
+                        
                         
 
                 <a href="/signup" class="signup"><img src="/images/ico_right_quick02.png"

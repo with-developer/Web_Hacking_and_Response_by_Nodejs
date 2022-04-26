@@ -3,18 +3,8 @@
 
 <head>
     <%- include ('./include/head2.ejs') %>
-        <style>
-            table {
-                width: 100%;
-                border: 1px solid #444444;
-                border-collapse: collapse;
-            }
-
-            th,
-            td {
-                border: 1px solid #444444;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap/css/bootstrap.css">
+        <script src="/css/bootstrap/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -43,41 +33,51 @@
             <div class="sub-container">
                 <div class="content-wrap" style="margin: 30px;">
 
-                    <table border="1" style="border: 2px;font-size: 1.3em;">
-                        <tr>
-                            <td>번호</td>
-                            <td>작성자</td>
-                            <td>제목</td>
-                        </tr>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="th-num">번호</th>
+                                <th scope="col" class="th-title">제목</th>
+                                <th scope="col" class="th-author">작성자</th>
+                                <th scope="col" class="th-date">작성시간</th>
+                            </tr>
+                        </thead>
                         <% for(var i=(page * page_num) - page_num; i < (page * page_num); i++) { if(i> length){
                             i++;
                             }else{
                             var data = rows[i]
+
                             %>
                             <tr>
                                 <td>
-                                    <%= i + 1 %>
+                                    <%= data._id %>
+                                </td>
+                                <td><a style="float:left" href="/board/read/<%= data._id %>"><%= data.title %></a>
+                                    
                                 </td>
                                 <td>
                                     <%= data.author %>
                                 </td>
-                                <td><a href="/board/read/<%= data._id %>">
-                                        <%= data.title %>
-                                    </a></td>
+                                <td>
+                                    <%= moment(data.time).format('YYYY-MM-DD hh:mm:ss') %>
+                                </td>
                             </tr>
                             <% } } %>
-                                <tr>
-                                    <td colspan="6">
-                                        <% for(var j=0; j < rows.length / page_num; j++){ %>
-                                            [<a href="/board/page/<%= j + 1 %>">
-                                                <%= j + 1 %>
-                                            </a>]
-                                            <% } %>
-                                    </td>
-                                </tr>
                     </table>
-                    <br><br>
-                    <button><a href="/board/form">글쓰기</a></button>
+                    <div style="float:right; margin-right:30px;">
+                        <a class="btn btn-secondary" href="/board/form" style="font-size: 15px; margin: 15px;">글쓰기</a>
+                    </div>
+                    <div>
+                        <br><br><br>
+                        <ul class="pagination justify-content-center">
+                            <% for(var j=0; j < rows.length / page_num; j++){ %>
+                                <li class="page-item"><a class="page-link" href="/board/page/<%= j + 1 %>">
+                                        <%= j + 1 %>
+                                    </a></li>
+                                <% } %>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </section>

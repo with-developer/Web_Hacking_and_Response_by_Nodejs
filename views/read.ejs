@@ -14,7 +14,7 @@
 
 
 		<table border="1" style="margin: 170px;margin-left: 450px;width: 50%;">
-			<input type="hidden" name="idx" value=""/>
+			<input type="hidden" name="idx" value="<%=results._id%>"/>
 			<tr>
 				<td>작성자</td>
 				<td><input type="text" name="name" id="name" value="<%=results.author%>" required/></td>
@@ -33,6 +33,63 @@
 				</td>
 			</tr>
 		</table>
+
+		<form action="/board/comment_form/<%=results._id%>" method="post">
+			<table border="1" style="margin: 170px;margin-left: 450px;width: 50%;">
+				<tr>
+					<td>댓글작성</td>
+				</tr>
+					<td>내용</td>
+					<td>
+						<textarea
+							name="content"
+							id="content"
+							cols="30"
+							rows="10"
+							required
+						></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button type="submit">작성</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+
+
+		<table border="1" style="margin: 170px;margin-left: 450px;width: 50%;">
+			<tr>
+				<td><h1>댓글출력</h1></td>
+			</tr>
+			<tr>
+				<td>Number</td>
+				<td>Comment</td>
+				<td>Author</td>
+				</tr>
+				<% for(var i=0; i < length+1; i++) { if(i> length){
+					i++;
+					}else{
+					var data = comment_results[i]
+					%>
+					<tr>
+						<td>
+							<%= i + 1 %>
+						</td>
+						<td>
+							<%= data.content %>
+							
+						</td>
+						<td>
+							<%= data.author %>
+						</td>
+					</tr>
+					<% } } %>
+		</table>
+
+
+
 
 
 		<footer>

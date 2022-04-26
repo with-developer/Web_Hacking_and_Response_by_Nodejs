@@ -6,6 +6,7 @@ const session = require("express-session");
 const path = require("path");
 const multer = require("multer");
 const ejs = require("ejs");
+const moment = require("moment");
 
 
 const options = {
@@ -19,7 +20,7 @@ const app = express();
 app.use(
 	session({
 		secret: "secretkey",
-		resave: true,
+		resave: false,
 		saveUninitialized: true,
 	})
 );
@@ -37,6 +38,8 @@ const noticeoverviewRouter = require("./routes/notice-overview");
 const profileRouter = require("./routes/profile");
 //const readRouter = require("./routes/read");
 const pageRouter = require("./routes/board");
+
+
 
 
 app.set("view engine", "ejs");
