@@ -105,7 +105,7 @@ header h1 a {display:inline-block;width:165px;height:32px; }
     header nav .in_menuList li > strong {color:#111;display:block;margin-bottom:20px}
 
     
-    header .rightQuickBox {display:flex;transition:all .5s;position:absolute;right: 0;top: 23px;}
+    header .rightQuickBox {display:flex;transition:all .5s;position:absolute;right: 0;top: 12px;}
     header .rightQuickBox a {display: inline-flex;color: #333;font-size:14px;padding: 5px 10px 5px 0;border:1px solid #999;align-items: center;}
     header .rightQuickBox img {margin:0 8px;filter:invert(1)}
     header .rightQuickBox a.ico_campus {margin-left:25px;}

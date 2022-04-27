@@ -1,6 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const mysql = require("mysql2");
+const session = require("express-session");
+
+const app = express();
+
+
+app.use(
+	session({
+		secret: "secretkey",
+		resave: false,
+		saveUninitialized: true,
+	})
+);
 
 const connection = mysql.createConnection({
 	host: "127.0.0.1",

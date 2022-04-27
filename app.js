@@ -6,7 +6,7 @@ const session = require("express-session");
 const path = require("path");
 const multer = require("multer");
 const ejs = require("ejs");
-
+const moment = require("moment");
 
 const options = {
 	key: fs.readFileSync("fake_keys/key.pem"),
@@ -15,11 +15,10 @@ const options = {
 
 const app = express();
 
-
 app.use(
 	session({
 		secret: "secretkey",
-		resave: true,
+		resave: false,
 		saveUninitialized: true,
 	})
 );
@@ -27,13 +26,15 @@ const indexRouter = require("./routes/index");
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 const resetpwRouter = require("./routes/resetpw");
-const formRouter = require("./routes/form");
-const boardRouter = require("./routes/board");
 const logoutRouter = require("./routes/logout");
 const inforoverviewRouter = require("./routes/infor-overview");
 const inforhistoryRouter = require("./routes/infor-history");
 const inforrecruitRouter = require("./routes/infor-recruit");
-const noticeoverviewRouter = require("./routes/notice-overview");
+const noticeRouter = require("./routes/notice");
+const profileRouter = require("./routes/profile");
+const pageRouter = require("./routes/board");
+
+
 
 
 app.set("view engine", "ejs");
@@ -51,10 +52,10 @@ app.use("/", indexRouter);
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/resetpw", resetpwRouter);
-app.use("/form", formRouter);
-app.use("/board", boardRouter);
 app.use("/logout", logoutRouter);
 app.use("/infor-overview", inforoverviewRouter);
 app.use("/infor-history", inforhistoryRouter);
 app.use("/infor-recruit", inforrecruitRouter);
-app.use("/notice", noticeoverviewRouter);
+app.use("/notice", noticeRouter);
+app.use("/profile", profileRouter);
+app.use("/board", pageRouter);
