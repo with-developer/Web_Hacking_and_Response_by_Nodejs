@@ -1,207 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<%- include ('./include/head.ejs') %>
-		
-	</head>
-	<body>
-		<header>
+
+<head>
+	<%- include ('./include/head.ejs') %>
+
+</head>
+
+<body>
+	<header>
 		<%- include ('./include/header.ejs') %>
 	</header>
-		<div class="limiter">
-			<div
-				class="container-login100"
-				style="background-image: url('images/bg-01.jpg')"
-			>
-				<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33"  style="margin-top: 100px;">
-					<form
-						class="login100-form validate-form flex-sb flex-w"
-						action="/signup"
-						method="post"
-					>
-						<span class="login100-form-title p-b-53">
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg')">
+			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33" style="margin-top: 100px;">
+				<form class="login100-form validate-form flex-sb flex-w" action="/signup" method="post">
+					<span class="login100-form-title p-b-53">
+						회원가입
+					</span>
+
+					<div class="p-t-31 p-b-9">
+						<span class="txt1"> 이름 </span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="이름을 기입해주세요.">
+						<input class="input100" type="text" name="username" />
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="p-t-13 p-b-9">
+						<span class="txt1"> 아이디 </span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="아이디를 기입해주세요.">
+						<input class="input100" type="text" name="id" id="id" />
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="p-t-13 p-b-9">
+						<span class="txt1"> 비밀번호 </span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="비밀번호를 기입해주세요." style="height: 42px;">
+						<input class="input100" type="password" name="password" />
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="p-t-13 p-b-9">
+						<span class="txt1"> 비밀번호 확인 </span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="비밀번호가 일치하지 않습니다." style="height: 42px;">
+						<input class="input100" type="password" name="repassword" />
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="p-t-31 p-b-9">
+						<span class="txt1"> 이메일 </span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="이메일을 기입해주세요.">
+						<input class="input100" type="text" name="email" />
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="p-t-13 p-b-9">
+						<span class="txt1"> 전화번호 </span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="전화번호를 기입해주세요."style="height: 42px;">
+						<input class="input100" type="phonenumber" name="phoneNumber" />
+						<span class="focus-input100"></span>
+					</div>
+
+
+
+					<div class="container-login100-form-btn m-t-17">
+						<button class="login100-form-btn" type="submit">
 							회원가입
-						</span>
-
-						<div class="p-t-31 p-b-9">
-							<span class="txt1"> 이름 </span>
-						</div>
-						<div
-							class="wrap-input100 validate-input"
-							data-validate="이름을 기입해주세요."
-						>
-							<input
-								class="input100"
-								type="text"
-								name="username"
-							/>
-							<span class="focus-input100"></span>
-						</div>
-
-						<div class="p-t-13 p-b-9">
-							<span class="txt1"> 아이디 </span>
-						</div>
-						<div
-							class="wrap-input100 validate-input"
-							data-validate="아이디를 기입해주세요."
-						>
-							<input
-								class="input100"
-								type="text"
-								name="id"
-								id="id"
-							/>
-							<div class="input-group-append">
-								<button
-									class="btn btn-outline-secondary"
-									id="idcheck_btn"
-								>
-									중복검사
-								</button>
-							</div>
-							<span class="focus-input100"></span>
-						</div>
-
-						<div class="p-t-13 p-b-9">
-							<span class="txt1"> 비밀번호 </span>
-						</div>
-						<div
-							class="wrap-input100 validate-input"
-							data-validate="비밀번호를 기입해주세요."
-						>
-							<input
-								class="input100"
-								type="password"
-								name="password"
-							/>
-							<span class="focus-input100"></span>
-						</div>
-
-						<div class="p-t-13 p-b-9">
-							<span class="txt1"> 비밀번호 확인 </span>
-						</div>
-						<div
-							class="wrap-input100 validate-input"
-							data-validate="비밀번호가 일치하지 않습니다."
-						>
-							<input
-								class="input100"
-								type="password"
-								name="repassword"
-							/>
-							<span class="focus-input100"></span>
-						</div>
-						
-						<div class="p-t-31 p-b-9">
-							<span class="txt1"> 이메일 </span>
-						</div>
-						<div
-							class="wrap-input100 validate-input"
-							data-validate="이메일을 기입해주세요."
-						>
-							<input 
-								class="input100" 
-								type="text" 
-								name="email" />
-							<span class="focus-input100"></span>
-						</div>
-
-						<div class="p-t-13 p-b-9">
-							<span class="txt1"> 전화번호 </span>
-						</div>
-						<div
-							class="wrap-input100 validate-input"
-							data-validate="전화번호를 기입해주세요."
-						>
-							<input
-								class="input100"
-								type="phonenumber"
-								name="phoneNumber"
-							/>
-							<span class="focus-input100"></span>
-						</div>
-
-						
-
-						<div class="container-login100-form-btn m-t-17">
-							<button class="login100-form-btn" type="submit">
-								회원가입
-							</button>
-						</div>
-					</form>
-				</div>
+						</button>
+					</div>
+				</form>
 			</div>
 		</div>
+	</div>
 
-		<div id="dropDownSelect1"></div>
+	<div id="dropDownSelect1"></div>
 
-		<!--===============================================================================================-->
-		<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-		<!--===============================================================================================-->
-		<script src="vendor/animsition/js/animsition.min.js"></script>
-		<!--===============================================================================================-->
-		<script src="vendor/bootstrap/js/popper.js"></script>
-		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-		<!--===============================================================================================-->
-		<script src="vendor/select2/select2.min.js"></script>
-		<!--===============================================================================================-->
-		<script src="vendor/daterangepicker/moment.min.js"></script>
-		<script src="vendor/daterangepicker/daterangepicker.js"></script>
-		<!--===============================================================================================-->
-		<script src="vendor/countdowntime/countdowntime.js"></script>
-		<!--===============================================================================================-->
-		<script src="js/main.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+	<footer>
+		<div>
+			<div class="ft_rigBox">
+				<div class="termsLink">
+					<a href="./terms-inside.html">내부정보관리규정</a>
+					<a href="./terms-persnal.html"><b>개인정보처리방침</b></a>
+					<a href="./terms-picture.html">영상정보기기운영방침</a>
+				</div>
+				<address>[52064] 서울특별시 강남구 도산대로1 (신사동, 닦다 빌딩) (주) 닦다 <br>본사 대표번호 02-****-****<span class="line">
+				</address>
+				<p>Copyright 2022 DaccDa.Co.LTD All Right Reserved.</p>
+			</div>
+		</div>
+	</footer>
 	
-		<footer>
-            <div>    
-                <div class="ft_rigBox">
-                    <div class="termsLink">
-                        <a href="./terms-inside.html">내부정보관리규정</a>
-                        <a href="./terms-persnal.html"><b>개인정보처리방침</b></a>
-                        <a href="./terms-picture.html">영상정보기기운영방침</a>
-                    </div>
-                    <address>[52064] 서울특별시 강남구 도산대로1 (신사동, 닦다 빌딩) (주) 닦다 <br>본사 대표번호 02-****-****<span class="line"></address>
-                        <p>Copyright 2022 DaccDa.Co.LTD All Right Reserved.</p>
-                </div>
-            </div>
-        </footer>
-		<script>
-			const id = document.getElementById("id");
-			const btn = document.getElementById("idcheck_btn");
-			if (btn) {
-				btn.addEventListener("click", clickHandler);
-			}
+</body>
 
-			function clickHandler() {
-				const data = JSON.stringify({ id: id.value }); //JSON을 스트링으로 변환
-
-				// Ajax
-				const xhr = new XMLHttpRequest();
-				// Request method , URL 지정
-				xhr.open("POST", "/signup/idcheck", true); // 첫번째 인자값은 request method, 두번째 인자값은 url
-				// Request Header(요청헤더) 조작
-				xhr.setRequestHeader("Content-type", "application/json");
-				// Request Body에 데이터를 넣어서 보내기
-				xhr.send(data);
-
-				// xhr.send()에 의해 서버로 내용이 전달되고 응답을 건내받으면 아래의 콜백함수가 실행된다.
-				xhr.onreadystatechange = () => {
-					if (xhr.readyState == 4 && xhr.status == 200) {
-						try {
-							// 가입가능 1 , 가입불가능 0
-							const { result } = JSON.parse(xhr.response);
-							if (result === 0)
-								throw new Error("에러가 발생했습니다.");
-							alert("사용가능한 아이디입니다!");
-
-						} catch (err) {
-							// 가입불가능
-							alert("중복된 아이디입니다!!");
-
-						}
-					}
-				};
-			}
-		</script>
-	</body>
 </html>

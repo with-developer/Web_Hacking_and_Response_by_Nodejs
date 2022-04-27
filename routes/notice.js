@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const mysql = require("mysql2");
 const moment = require("moment");
+const mysql = require("mysql2");
 require("dotenv").config();
 
 const connection = mysql.createConnection({
@@ -10,6 +10,7 @@ const connection = mysql.createConnection({
 	password: process.env.DB_PASSWORD,
 	database: "vulnnode",
 });
+
 
 router.get("/form_notice", function (req, res, next) {
 	var id = req.session.name;
@@ -24,6 +25,7 @@ router.get("/form_notice", function (req, res, next) {
 });
 
 router.post("/form_notice", function (req, res, next) {
+
 	var title = req.body.title;
 	var content = req.body.content;
 	var id = req.session.name;
@@ -121,5 +123,10 @@ router.get("/page/:page", function (req, res, next) {
 		console.log(rows.length - 1);
 	});
 });
+
+
+
+
+
 
 module.exports = router;
