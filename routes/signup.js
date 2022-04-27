@@ -7,14 +7,14 @@ const path = require("path");
 const connection = mysql.createConnection({
 	host: "127.0.0.1",
 	user: "root",
-	password: "sos7136@",
+	password: process.env.DB_PASSWORD,
 	database: "vulnnode",
 });
 
-
-router.get('/', function(req,res){ // 2
-	res.render('signup', {name:req.query.nameQuery});
-  });
+router.get("/", function (req, res) {
+	// 2
+	res.render("signup", { name: req.query.nameQuery });
+});
 
 router.post("/", (req, res) => {
 	let id = req.body.id;
