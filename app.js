@@ -8,14 +8,12 @@ const multer = require("multer");
 const ejs = require("ejs");
 const moment = require("moment");
 
-
 const options = {
 	key: fs.readFileSync("fake_keys/key.pem"),
 	cert: fs.readFileSync("fake_keys/cert.pem"),
 };
 
 const app = express();
-
 
 app.use(
 	session({
@@ -28,15 +26,12 @@ const indexRouter = require("./routes/index");
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 const resetpwRouter = require("./routes/resetpw");
-//const formRouter = require("./routes/form");
 const logoutRouter = require("./routes/logout");
 const inforoverviewRouter = require("./routes/infor-overview");
 const inforhistoryRouter = require("./routes/infor-history");
 const inforrecruitRouter = require("./routes/infor-recruit");
-const noticeoverviewRouter = require("./routes/notice-overview");
-//const qnaRouter = require("./routes/qna");
+const noticeRouter = require("./routes/notice");
 const profileRouter = require("./routes/profile");
-//const readRouter = require("./routes/read");
 const pageRouter = require("./routes/board");
 
 
@@ -57,13 +52,10 @@ app.use("/", indexRouter);
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/resetpw", resetpwRouter);
-//app.use("/form", formRouter);
 app.use("/logout", logoutRouter);
 app.use("/infor-overview", inforoverviewRouter);
 app.use("/infor-history", inforhistoryRouter);
 app.use("/infor-recruit", inforrecruitRouter);
-//app.use("/qna", qnaRouter);
-app.use("/notice", noticeoverviewRouter);
+app.use("/notice", noticeRouter);
 app.use("/profile", profileRouter);
-//app.use("/read", readRouter);
 app.use("/board", pageRouter);

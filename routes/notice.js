@@ -5,7 +5,7 @@ const path = require("path");
 
 
 router.get('/', function(req,res){ // 2
-	res.render('notice-overview', {user: req.session.name});
+	res.render('notice', {user: req.session.name});
   });
 
 
