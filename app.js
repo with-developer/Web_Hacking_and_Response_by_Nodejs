@@ -34,13 +34,8 @@ const noticeRouter = require("./routes/notice");
 const profileRouter = require("./routes/profile");
 const pageRouter = require("./routes/board");
 
-
-
-
 app.set("view engine", "ejs");
 app.set("views", "./views");
-
-
 
 app.use(express.json());
 app.use(express.urlencoded());
