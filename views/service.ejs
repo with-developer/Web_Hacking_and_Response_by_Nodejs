@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include ('./include/head2.ejs') %>
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap/css/bootstrap.css">
+        <script src="/css/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header>
+            <%- include ('./include/header.ejs') %>
+        </header>
+
+
+        <nav class="locationNav">
+            <ol>
+                <li><a href="./" title="홈 바로가기"></a></li>
+                <li><a href="/board/page/1">서비스 예약</a></li>
+            </ol>
+        </nav>
+
+        <section class="subContainer">
+
+            <h2 class="titSub">서비스 예약</h2>
+            <div class="subContent">
+                <div>
+                    <div></div>
+                    </h3>
+                </div>
+            </div>
+            <div class="sub-container" style="margin-bottom: 20px; padding: 50px; max-width: 800px; background-color: #DDDDDD;">
+                <div class="content-wrap" style="margin: 30px;">
+
+
+                    <form action="/service/form" style="font-size: 18px;">
+                        <p><input type="date"></p>
+                        <label><input type="checkbox" name="DigitalCleaning" value="DigitalCleaning"
+                                style="appearance: auto;"> 디지털청소 서비스</label><br>
+                        <label><input type="checkbox" name="PrivacyService" value="PrivacyService"
+                                style="appearance: auto;"> 개인정보 서비스</label><br>
+                        <label><input type="checkbox" name="CleaningSolution" value="CleaningSolution"
+                                style="appearance: auto;"> 청소 솔루션</label><br>
+                        <label><input type="checkbox" name="SmartSystem" value="SmartSystem" style="appearance: auto;">
+                            스마트 시스템</label><br>
+                        <textarea style="width: 700px;"></textarea>
+                        <br><br><br>
+                        <button type="button" class="btn btn-outline-dark"style="font-size: 18px;" type="submit">
+                            신청
+                        </button>
+                    </form>
+
+
+                </div>
+            </div>
+        </section>
+
+        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+        <script src="vendor/animsition/js/animsition.min.js"></script>
+        <script src="vendor/bootstrap/js/popper.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="vendor/select2/select2.min.js"></script>
+        <script src="vendor/daterangepicker/moment.min.js"></script>
+        <script src="vendor/daterangepicker/daterangepicker.js"></script>
+        <script src="vendor/countdowntime/countdowntime.js"></script>
+        <script src="js/main.js"></script>
+
+        <footer style="border-top: 1px solid #e2e2e2;
+        padding: 72px 0;
+        background-color: #303030;
+        color: #fff;
+        font-family: 'NanumSquareL';">
+            <%- include ('./include/footer.ejs') %>
+        </footer>
+
+
+
+    </div>
+</body>
+
+</html>

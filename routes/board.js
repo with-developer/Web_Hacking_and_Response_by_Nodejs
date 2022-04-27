@@ -4,6 +4,7 @@ const mysql = require("mysql2");
 const moment = require("moment");
 const multer = require("multer");
 const { urlencoded } = require("express");
+
 require("dotenv").config();
 
 const connection = mysql.createConnection({
@@ -135,6 +136,7 @@ router.get("/read/:idx", function (req, res, next) {
 				user: req.session.name,
 				comment_results: comment_results,
 				length: comment_results.length - 1,
+                moment,
 			}); // 첫번째행 한개의데이터만 랜더링 요청
 		});
 	});

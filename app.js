@@ -33,6 +33,7 @@ const inforrecruitRouter = require("./routes/infor-recruit");
 const noticeRouter = require("./routes/notice");
 const profileRouter = require("./routes/profile");
 const pageRouter = require("./routes/board");
+const serviceRouter = require("./routes/service");
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
@@ -54,3 +55,4 @@ app.use("/infor-recruit", inforrecruitRouter);
 app.use("/notice", noticeRouter);
 app.use("/profile", profileRouter);
 app.use("/board", pageRouter);
+app.use("/service", serviceRouter);
