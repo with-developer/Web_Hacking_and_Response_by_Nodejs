@@ -13,33 +13,60 @@
 			method="post"
 			style="margin-top: 100px; margin-right: 400px; margin-left: 300px"
 		>
-			<table width="400">
+			<table
+				width="400"
+				class="table table-striped"
+				style="text-align: center; border: 1px solid #dddddd"
+			>
+				<thead>
+					<tr>
+						<th
+							colspan="2"
+							style="
+								background-color: #eeeeee;
+								text-align: center;
+							"
+						>
+							게시물 작성
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<input
+								type="text"
+								class="form-control"
+								name="title"
+								id="title"
+								size="10"
+								maxLength="50"
+								placeholder="제목을 입력해주세요."
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea
+								name="content"
+								class="form-control"
+								id="content"
+								cols="200"
+								rows="5"
+								style="height: 400px"
+								placeholder="내용을 입력해주세요."
+							></textarea>
+						</td>
+					</tr>
+				</tbody>
 				<tr>
 					<td>
 						<input
-							type="text"
-							name="title"
-							id="title"
-							size="10"
-							maxLength="50"
-							placeholder="제목을 입력해주세요."
+							type="submit"
+							class="btn btn-primary pull-right"
+							value="글쓰기"
 						/>
 					</td>
-				</tr>
-				<tr>
-					<td>
-						<textarea
-							name="content"
-							id="content"
-							cols="200"
-							rows="5"
-							style="height: 400px"
-							placeholder="내용을 입력해주세요."
-						></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td><input type="submit" /></td>
 				</tr>
 			</table>
 		</form>

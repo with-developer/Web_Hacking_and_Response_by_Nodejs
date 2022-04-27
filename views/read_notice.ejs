@@ -12,61 +12,26 @@
             <%- include ('./include/header.ejs') %>
         </header>
 
-
-		<table border="1" style="margin: 170px;margin-left: 450px;width: 50%;">
+		<table border="1" style="margin: 170px;margin-left: 450px;width: 50%; border: 1px solid #dddddd;" class="table table-striped">
 			<input type="hidden" name="idx" value="<%=results._id%>"/>
 			<tr>
-				<td>작성자</td>
-				<td><input type="text" name="name" id="name" value="<%=results.author%>" required/></td>
+				<td>제목</td>
+				<td colspan="2"><%=results.title%></td>
 			</tr>
 			<tr>
-				<td>제목</td>
-				<td><input type="text" name="title" id="title" value="<%=results.title%>" required/></td>
+				<td>작성자</td>
+				<td colspan="2"><%=results.author%></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea name="content" id="content" cols="30" rows="10" required><%=results.content%></textarea></td>
+				<td colspan="2" style="height: 200px;"><%=results.content%></td>
 			</tr>
 			<tr>
-				<td colspan="2">
-					<a href="/notice/page/1">목록</a>
-				</td>
-			</tr>
-		</table>
-
-		<form action="/notice/comment_form_notice/<%=results._id%>" method="post">
-			<table border="1" style="margin: 170px;margin-left: 450px;width: 50%;">
-				<tr>
-					<td>댓글작성</td>
-				</tr>
-					<td>내용</td>
-					<td>
-						<textarea
-							name="content"
-							id="content"
-							cols="30"
-							rows="10"
-							required
-						></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<button type="submit">작성</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-
-
-		<table border="1" style="margin: 170px;margin-left: 450px;width: 50%;">
-			<tr>
-				<td><h1>댓글출력</h1></td>
+				<td>파일</td>
 			</tr>
 			<tr>
-				<td>Number</td>
-				<td>Comment</td>
-				<td>Author</td>
+				<td colspan="2" style="text-align: center;">댓글</td>
+				<td style="text-align: center;">작성자</td>
 				</tr>
 				<% for(var i=0; i < length+1; i++) { if(i> length){
 					i++;
@@ -74,20 +39,51 @@
 					var data = comment_results[i]
 					%>
 					<tr>
-						<td>
+						<td style="text-align: center;">
 							<%= i + 1 %>
 						</td>
 						<td>
 							<%= data.content %>
 							
 						</td>
-						<td>
+						<td style="text-align: center;">
 							<%= data.author %>
 						</td>
 					</tr>
 					<% } } %>
+					<tr>
+						<td class="btn btn-primary">
+							<a href="/notice/page/1">목록</a>
+						</td>
+					</tr>
 		</table>
 
+		<form action="/notice/comment_form_notice/<%=results._id%>" method="post">
+			<table border="1" style="margin: 170px;margin-left: 450px;width: 50%; text-align: center; border: 1px solid #dddddd;">
+				<thead>
+					<tr>
+						<th colspan="2" style="background-color: #eeeeee; text-align: center;">
+							댓글 작성
+						</th>
+					</tr>
+				</thead>
+					<td>
+						<textarea
+							name="content"
+							id="content"
+							cols="30"
+							rows="4"
+							required
+						></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button type="submit" class="btn btn-primary pull-right">작성</button>
+					</td>
+				</tr>
+			</table>
+		</form>
 
 
 
