@@ -1,16 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const mysql = require("mysql2");
 const nodemailer = require("nodemailer");
 const path = require("path");
 require("dotenv").config();
-
-const connection = mysql.createConnection({
-	host: "127.0.0.1",
-	user: "root",
-	password: process.env.DB_PASSWORD,
-	database: "vulnnode",
-});
 
 router.get("/", (req, res) => {
 	res.sendFile(path.join(__dirname, "..", "/public/resetpw.html"));
@@ -20,7 +12,7 @@ router.post("/", (req, res) => {
 	let username = req.body.username;
 	let email = req.body.email;
 	if (username && email) {
-		connection.query(
+		db.query(
 			"SELECT * FROM users WHERE username = ? AND email = ?",
 			[username, email],
 			function (error, results, fields) {

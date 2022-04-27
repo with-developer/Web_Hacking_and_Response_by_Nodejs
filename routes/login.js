@@ -4,7 +4,9 @@ const mysql = require("mysql2");
 const session = require("express-session");
 require("dotenv").config();
 
+
 const app = express();
+var db = require('/db.js');
 
 app.use(
 	session({
@@ -14,12 +16,7 @@ app.use(
 	})
 );
 
-const connection = mysql.createConnection({
-	host: "127.0.0.1",
-	user: "root",
-	password: process.env.DB_PASSWORD,
-	database: "vulnnode",
-});
+
 
 const filterStrings = [
 	"CREATE",
@@ -56,7 +53,7 @@ router.post("/", (req, res) => {
 				"<script>alert('DB테이블 공격하지마세요!!');history.back();</script>"
 			);
 		} else {
-			connection.query(
+			db.query(
 				"SELECT * FROM users WHERE id = ? AND password = " +
 					`'${password}'`,
 				[id, password],
