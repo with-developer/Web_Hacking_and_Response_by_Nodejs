@@ -38,13 +38,13 @@
                 </div>
             </li>
             <li>
-                <a href="/notice" class="pcMenu">공지사항</a>
+                <a href="/notice/page/1" class="pcMenu">공지사항</a>
                 <a href="#" class="moMenu">공지사항</a>
                 <div class="innerMenuBox">
                     <ul class="in_menuList">
                         <li>
                             <div class="">
-                                <a href="/notice">공지사항</a>
+                                <a href="/notice/page/1">공지사항</a>
                             </div>
                         </li>
                     </ul>
@@ -85,13 +85,19 @@
           <% } else { %>
           
             <div class="rightQuickBox">
-                <a href="/login" class="login"><img src="/images/ico_right_quick01.png"
-                        alt="로그인 아이콘">로그인</a>
+                <a href="/login" class="signup" style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
+                    <button type="button" class="btn btn-outline-dark"style="font-size: 18px;">
+                        로그인
+                    </button>
+                </a>
                         
                         
-
-                <a href="/signup" class="signup"><img src="/images/ico_right_quick02.png"
-                        alt="회원가입 아이콘">회원가입</a>
+                <a href="/signup" class="signup" style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
+                    <button type="button" class="btn btn-outline-dark"style="font-size: 18px;">
+                        회원가입
+                    </button>
+                </a>
+                
             </div>
           
           <% } %>

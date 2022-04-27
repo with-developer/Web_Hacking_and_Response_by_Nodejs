@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('./include/head.ejs') %>
+
+</head>
+
+<body>
+    <header>
+        <%- include ('./include/header.ejs') %>
+    </header>
+
+
+    <form id="Form" action="/notice/form_notice" method="post" style="margin-top: 100px;margin-right: 400px;margin-left: 300px;">
+        <table width="400">
+            <tr>
+                <th>제목</th>
+                <td><input type="text" name="title" id="title" size="10" maxLength="50"></td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td><textarea name="content" id="content" cols="200" rows="5" style="height: 400px;"></textarea></td>
+            </tr>
+            <tr>
+                <th>전송</th>
+                <td><input type="submit"></td>
+            </tr>
+        </table>
+    </form>
+
+    <footer>
+        <%- include ('./include/footer.ejs') %>
+    </footer>
+
+</body>
+
+</html>
