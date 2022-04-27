@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const session = require("express-session");
 require("dotenv").config();
 
-const app = express();
+
 
 const connection = mysql.createConnection({
 	host: "127.0.0.1",
@@ -12,6 +12,10 @@ const connection = mysql.createConnection({
 	password: process.env.DB_PASSWORD,
 	database: "vulnnode",
 });
+
+const app = express();
+
+
 
 app.use(
 	session({
@@ -81,5 +85,46 @@ router.post("/", (req, res) => {
 		res.end();
 	}
 });
+
+
+
+
+router.get('/find_ID', function(req,res){ // 2
+	let code=0;
+	res.render('findID', {user: req.session.name, code: code});
+  });
+
+  router.post('/find_ID', function(req,res){ // 2
+	let username = req.body.username;
+	let email = req.body.email;
+	console.log("username: "+username);
+	console.log("email:"+email);
+	connection.query(
+		"SELECT * from users where username = ? and email = ?",
+	 [username, email], function (err, results) {
+		if (err) console.error("err : " + err);
+		if(results.length==1){
+			console.log(results[0].id)
+			res.render("findID", {
+				code: "success",
+				results_id: results[0].id,
+				results_username: results[0].username,
+				results_email: results[0].email
+			});
+		}else{
+			res.send(
+				"<script>alert('계정이 존재하지 않습니다.');history.back();</script>"
+			);
+		}
+		console.log(results.length);
+		
+	});
+
+
+  });
+
+
+
+
 
 module.exports = router;

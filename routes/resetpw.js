@@ -2,19 +2,28 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const path = require("path");
+const mysql = require("mysql2");
+
 require("dotenv").config();
+
+const connection = mysql.createConnection({
+	host: "127.0.0.1",
+	user: "root",
+	password: process.env.DB_PASSWORD,
+	database: "vulnnode",
+});
 
 router.get("/", (req, res) => {
 	res.sendFile(path.join(__dirname, "..", "/public/resetpw.html"));
 });
 
 router.post("/", (req, res) => {
-	let username = req.body.username;
+	let id = req.body.id;
 	let email = req.body.email;
-	if (username && email) {
-		db.query(
-			"SELECT * FROM users WHERE username = ? AND email = ?",
-			[username, email],
+	if (id && email) {
+		connection.query(
+			"SELECT * FROM users WHERE id = ? AND email = ?",
+			[id, email],
 			function (error, results, fields) {
 				if (error) throw error;
 				if (results.length > 0) {
@@ -28,7 +37,7 @@ router.post("/", (req, res) => {
 						secure: true,
 						auth: {
 							user: "nodeapp000@gmail.com",
-							pass: process.env.GMAIL_PASSWORD,
+							pass: process.env.GMAIL_PW
 						},
 					});
 					const emailOptions = {
@@ -37,7 +46,7 @@ router.post("/", (req, res) => {
 						subject: "Binding에서 비밀번호를 알려드립니다.",
 						html:
 							"<h1 >Binding에서 " +
-							username +
+							id +
 							"님의 비밀번호를 알려드립니다.</h1> <h2> 비밀번호 : " +
 							password +
 							"</h2>",
