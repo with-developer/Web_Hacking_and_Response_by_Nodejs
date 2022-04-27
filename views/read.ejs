@@ -6,18 +6,98 @@
 </head>
 
 <body>
-	<div id="wrap">
-		<header>
-			<!-- main class mainHead -->
-			<%- include ('./include/header.ejs') %>
-		</header>
-		<nav class="locationNav">
-			<ol>
-				<li><a href="./" title="홈 바로가기"></a></li>
-				<li><a href="/board/page/1">자유게시판</a></li>
-			</ol>
-		</nav>
-		<section class="subContainer">
+
+    <div id="wrap">
+        <header>
+            <!-- main class mainHead -->
+            <%- include ('./include/header.ejs') %>
+        </header>
+
+
+		<table border="1" style="margin: 170px;margin-left: 450px;width: 50%; border: 1px solid #dddddd;" class="table table-striped">
+			<input type="hidden" name="idx" value="<%=results._id%>"/>
+			<tr>
+				<td>제목</td>
+				<td colspan="2"><%=results.title%></td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td colspan="2"><%=results.author%></td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td colspan="2" style="height: 200px;"><%=results.content%></td>
+			</tr>
+			<tr>
+				<td>파일</td>
+				<td colspan="2">
+					<ul>
+							<li><a href='/board/download/uploads/images/<%= results.filename%>'><%= results.filename%></a></li>
+							
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;">댓글</td>
+				<td style="text-align: center;">작성자</td>
+				</tr>
+				<% for(var i=0; i < length+1; i++) { if(i> length){
+					i++;
+					}else{
+					var data = comment_results[i]
+					%>
+					<tr>
+						<td style="text-align: center;">
+							<%= i + 1 %>
+						</td>
+						<td>
+							<%= data.content %>
+							
+						</td>
+						<td style="text-align: center;">
+							<%= data.author %>
+						</td>
+					</tr>
+					<% } } %>
+					<tr>
+						<td class="btn btn-primary">
+							<a href="/board/page/1">목록</a>
+						</td>
+						<td class="btn btn-primary">
+							<a href="/board/update/<%=results._id%>">수정</a>
+						</td>
+						<td class="btn btn-primary">
+							<a href="/board/delete/<%=results._id%>">삭제</a>
+						</td>
+					</tr>
+		</table>
+
+		<form action="/board/comment_form/<%=results._id%>" method="post">
+			<table border="1" style="margin: 170px;margin-left: 450px;width: 50%; text-align: center; border: 1px solid #dddddd;">
+				<thead>
+					<tr>
+						<th colspan="2" style="background-color: #eeeeee; text-align: center;">
+							댓글 작성
+						</th>
+					</tr>
+				</thead>
+					<td>
+						<textarea
+							name="content"
+							id="content"
+							cols="30"
+							rows="4"
+							required
+						></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button type="submit" class="btn btn-primary pull-right">작성</button>
+					</td>
+				</tr>
+			</table>
+		</form>
 
 			<h2 class="titSub">
 				<%=results.title%>

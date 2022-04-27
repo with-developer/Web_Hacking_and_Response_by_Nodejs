@@ -5,6 +5,7 @@ const session = require("express-session");
 require("dotenv").config();
 
 
+
 const connection = mysql.createConnection({
 	host: "127.0.0.1",
 	user: "root",
@@ -15,6 +16,7 @@ const connection = mysql.createConnection({
 const app = express();
 
 
+
 app.use(
 	session({
 		secret: "secretkey",
@@ -22,8 +24,6 @@ app.use(
 		saveUninitialized: true,
 	})
 );
-
-
 
 const filterStrings = [
 	"CREATE",
