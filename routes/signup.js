@@ -3,6 +3,7 @@ const { rmSync } = require("fs");
 const router = express.Router();
 const mysql = require("mysql2");
 const path = require("path");
+require("dotenv").config();
 
 const connection = mysql.createConnection({
 	host: "127.0.0.1",
