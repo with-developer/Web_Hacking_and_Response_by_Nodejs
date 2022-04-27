@@ -1,38 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<%- include ('./include/head.ejs') %>
+	</head>
 
-<head>
-    <%- include ('./include/head.ejs') %>
+	<body>
+		<header><%- include ('./include/header.ejs') %></header>
 
-</head>
+		<form
+			id="Form"
+			action="/notice/form_notice"
+			method="post"
+			style="margin-top: 100px; margin-right: 400px; margin-left: 300px"
+		>
+			<table
+				width="400"
+				class="table table-striped"
+				style="text-align: center; border: 1px solid #dddddd"
+			>
+				<thead>
+					<tr>
+						<th
+							colspan="2"
+							style="
+								background-color: #eeeeee;
+								text-align: center;
+							"
+						>
+							공지사항 작성
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<input
+								type="text"
+								class="form-control"
+								name="title"
+								id="title"
+								size="10"
+								maxLength="50"
+								placeholder="제목을 입력해주세요."
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea
+								name="content"
+								class="form-control"
+								id="content"
+								cols="200"
+								rows="5"
+								style="height: 400px"
+								placeholder="내용을 입력해주세요."
+							></textarea>
+						</td>
+					</tr>
+				</tbody>
+				<tr>
+					<td>
+						<input
+							type="submit"
+							class="btn btn-primary pull-right"
+							value="글쓰기"
+						/>
+					</td>
+				</tr>
+			</table>
+		</form>
 
-<body>
-    <header>
-        <%- include ('./include/header.ejs') %>
-    </header>
-
-
-    <form id="Form" action="/notice/form_notice" method="post" style="margin-top: 100px;margin-right: 400px;margin-left: 300px;">
-        <table width="400">
-            <tr>
-                <th>제목</th>
-                <td><input type="text" name="title" id="title" size="10" maxLength="50"></td>
-            </tr>
-            <tr>
-                <th>내용</th>
-                <td><textarea name="content" id="content" cols="200" rows="5" style="height: 400px;"></textarea></td>
-            </tr>
-            <tr>
-                <th>전송</th>
-                <td><input type="submit"></td>
-            </tr>
-        </table>
-    </form>
-
-    <footer>
-        <%- include ('./include/footer.ejs') %>
-    </footer>
-
-</body>
-
+		<footer><%- include ('./include/footer.ejs') %></footer>
+	</body>
 </html>

@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<%- include ('./include/index_head.ejs') %>
+	</head>
 
-<head>
-    <%- include ('./include/index_head.ejs') %>
-</head>
+	<body>
+		<div id="wrap">
+			<header>
+				<!-- main class mainHead -->
+				<%- include ('./include/header.ejs') %>
+			</header>
 
-<body>
-    <div id="wrap">
-        <header>
-            <!-- main class mainHead -->
-            <%- include ('./include/header.ejs') %>
-        </header>
+			<div style="margin: 200px">
+				<table
+					width="400"
+					class="table table-striped"
+					style="text-align: center; border: 1px solid #dddddd"
+				>
+					<thead>
+						<tr>
+							<th colspan="2">마이페이지</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>아이디</td>
+							<td><%= user %></td>
+						</tr>
+						<tr>
+							<td>이름</td>
+							<td><%= userinfo.username %></td>
+						</tr>
+						<tr>
+							<td>전화번호</td>
+							<td><%= userinfo.phonenumber %></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
-        <div style="margin: 200px;">
-
-            id: <%= user %><br>
-            username: <%= userinfo.username %> <br>
-            phonenumber: <%= userinfo.phonenumber %>
-
-        </div>
-
-
-
-
-        <footer>
-            <%- include ('./include/footer.ejs') %>
-        </footer>
-
-
-
-    </div>
-
-</body>
-
+			<footer><%- include ('./include/footer.ejs') %></footer>
+		</div>
+	</body>
 </html>
