@@ -12,6 +12,7 @@
 			action="/board/form"
 			method="post"
 			style="margin-top: 100px; margin-right: 400px; margin-left: 300px"
+			enctype="multipart/form-data"
 		>
 			<table
 				width="400"
@@ -56,6 +57,13 @@
 								style="height: 400px"
 								placeholder="내용을 입력해주세요."
 							></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input
+							type="file" class="form-control-file" id="fileupload" name="fileupload"
+							></input>
 						</td>
 					</tr>
 				</tbody>

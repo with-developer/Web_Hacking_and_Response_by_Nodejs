@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mysql = require("mysql2");
 const moment = require("moment");
+const multer = require("multer");
+const { urlencoded } = require("express");
 require("dotenv").config();
 
 const connection = mysql.createConnection({
@@ -11,6 +13,33 @@ const connection = mysql.createConnection({
 	database: "vulnnode",
 });
 
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		//파일이 이미지 파일이면
+		if (
+			file.mimetype == "image/jpeg" ||
+			file.mimetype == "image/jpg" ||
+			file.mimetype == "image/png"
+		) {
+			console.log("이미지 파일이네요");
+			cb(null, "uploads/images");
+			//텍스트 파일이면
+		} else if (
+			file.mimetype == "application/pdf" ||
+			file.mimetype == "application/txt" ||
+			file.mimetype == "application/octet-stream"
+		) {
+			console.log("텍스트 파일이네요");
+			cb(null, "uploads/texts");
+		}
+	},
+	//파일이름 설정
+	filename: function (req, file, cb) {
+		cb(null, Date.now() + "-" + file.originalname);
+	},
+});
+
+var upload = multer({ storage: storage });
 router.get("/form", function (req, res, next) {
 	var id = req.session.name;
 
@@ -23,7 +52,7 @@ router.get("/form", function (req, res, next) {
 	}
 });
 
-router.post("/form", function (req, res, next) {
+router.post("/form", upload.single("fileupload"), function (req, res, next) {
 	var title = req.body.title;
 	var content = req.body.content;
 	var id = req.session.name;
@@ -34,8 +63,8 @@ router.post("/form", function (req, res, next) {
 		);
 	} else {
 		connection.query(
-			"insert into board (title, content, author) VALUES ?",
-			[[[title, content, id]]],
+			"insert into board (title, content, author, filename) VALUES ?",
+			[[[title, content, id, req.file.filename]]],
 			function (err, results, fields) {
 				if (err) console.log(err);
 				res.send(
@@ -44,6 +73,15 @@ router.post("/form", function (req, res, next) {
 			}
 		);
 	}
+});
+
+router.get("/download/uploads/images/:name", function (req, res) {
+	var filename = req.params.name;
+	console.log(req.params.name);
+	console.log(filename);
+	var file = __dirname + "/../uploads/images/" + decodeURIComponent(filename);
+	console.log(file);
+	res.download(file);
 });
 
 router.post("/comment_form/:idx", function (req, res, next) {
@@ -81,6 +119,8 @@ router.get("/read/:idx", function (req, res, next) {
 
 	var sql = "SELECT * from board where _id=?";
 	var comment = "SELECT * from comment where board_id=?";
+	var path = __dirname + "/../" + "uploads/images/";
+
 	connection.query(sql, [idx], function (err, results) {
 		// 한개의 글만조회하기때문에 마지막idx에 매개변수를 받는다
 		if (err) console.error("err : " + err);
