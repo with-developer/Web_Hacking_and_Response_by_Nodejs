@@ -8,7 +8,7 @@ require("dotenv").config();
 const connection = mysql.createConnection({
 	host: "127.0.0.1",
 	user: "root",
-	password: "sos7136@",
+	password: process.env.DB_PASSWORD,
 	database: "vulnnode",
 });
 

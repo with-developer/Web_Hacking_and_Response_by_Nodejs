@@ -5,7 +5,6 @@ const session = require("express-session");
 
 const app = express();
 
-
 app.use(
 	session({
 		secret: "secretkey",
@@ -17,7 +16,7 @@ app.use(
 const connection = mysql.createConnection({
 	host: "127.0.0.1",
 	user: "root",
-	password: "sos7136@",
+	password: process.env.DB_PASSWORD,
 	database: "vulnnode",
 });
 
@@ -36,10 +35,10 @@ const filterStrings = [
 	"alter",
 ];
 
-router.get('/', function(req,res){ // 2
-	res.render('login', {name:req.query.nameQuery, user: req.session.name});
-  });
-
+router.get("/", function (req, res) {
+	// 2
+	res.render("login", { name: req.query.nameQuery, user: req.session.name });
+});
 
 router.post("/", (req, res) => {
 	let id = req.body.id;
