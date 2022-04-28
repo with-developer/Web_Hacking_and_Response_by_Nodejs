@@ -47,12 +47,13 @@
 							<thead>
 								<tr>
 									<th scope="col" class="th-num">번호</th>
-									<th scope="col" class="th-title">제목</th>
-									<th scope="col" class="th-author">
-										작성자
+									<th scope="col" class="th-id">아이디</th>
+									<th scope="col" class="th-username">
+										이름
 									</th>
-									<th scope="col" class="th-date">
-										작성시간
+									<th scope="col" class="th-email">이메일</th>
+									<th scope="col" class="th-phonenumber">
+										전화번호
 									</th>
 									<th scope="col" class="th-delete">삭제</th>
 								</tr>
@@ -63,20 +64,15 @@
 							<tr>
 								<td><%= i + 1 %></td>
 								<td>
+									<a style="float: left"><%= data.id %></a>
+								</td>
+								<td><%= data.username %></td>
+								<td><%= data.email %></td>
+								<td><%= data.phonenumber %></td>
+								<td>
 									<a
-										style="float: left"
-										href="/board/read/<%= data._id %>"
-										><%= data.title %></a
+										href="/admin/user/delete/<%= data._id %>"
 									>
-								</td>
-								<td><%= data.author %></td>
-								<td>
-									<%=
-									moment(data.time).format('YYYY-MM-DDhh:mm:ss')
-									%>
-								</td>
-								<td>
-									<a href="delete/<%= data._id %>">
 										<button class="btn btn-dark">
 											삭제
 										</button>
