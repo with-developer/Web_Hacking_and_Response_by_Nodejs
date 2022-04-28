@@ -58,7 +58,6 @@ router.post("/form", upload.single("fileupload"), function (req, res, next) {
 	var title = req.body.title;
 	var content = req.body.content;
 	var id = req.session.name;
-
 	if (id === undefined) {
 		res.send(
 			"<script>alert('로그인 후 게시글을 작성하세요.');history.back();</script>"
