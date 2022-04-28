@@ -85,15 +85,20 @@ router.get("/secession", function (req, res) {
     function (err, results) {
       if (err) console.error("err : " + err);
       if (results.affectedRows > 0) {
-        res.send(
-          "<script>alert('회원 탈퇴가 완료되었습니다. 닦다를 이용해주셔서 감사합니다.');document.location.href='/';</script>"
-        );
+        req.session.destroy(function (err) {
+          if (err) {
+            console.error("err", err);
+          } else {
+            res.send(
+              '<script>alert("회원 탈퇴가 완료되었습니다. 닦다를 이용해주셔서 감사합니다.");location.href="/";</script>'
+            );
+          }
+        });
       } else {
         res.send(
           "<script>alert('에러가 발생했습니다.');history.back();</script>"
         );
       }
-      res.end();
     }
   );
 });
