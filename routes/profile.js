@@ -13,38 +13,45 @@ const connection = mysql.createConnection({
 
 router.get("/", function (req, res) {
   let id = req.session.name;
-  let password_check;
-  if (password_check == undefined || password_check == "NO") {
-    password_check = "NO";
-    console.log(password_check);
-    res.render("profile", {
-      password_check: password_check,
-      user: req.session.name,
-    });
-  } else if (password_check == true) {
-    connection.query(
-      "select * from users where id = ? ",
-      [[[id]]],
-      function (error, results, field) {
-        if (error) {
-          throw error;
-        }
 
-        if (results.length == 0) {
-          res.send(
-            "<script>alert('로그인 후 프로필을 확인하세요.');history.back();</script>"
-          );
-        } else {
-          password_check = "YES";
-          console.log(password_check);
-          res.render("profile", {
-            password_check: password_check,
-            userinfo: results[0],
-            user: req.session.name,
-          });
-        }
-      }
+  if (id == undefined) {
+    res.send(
+      "<script>alert('로그인 후 프로필을 확인하세요.');history.back();</script>"
     );
+  } else {
+    let password_check;
+    if (password_check == undefined || password_check == "NO") {
+      password_check = "NO";
+      console.log(password_check);
+      res.render("profile", {
+        password_check: password_check,
+        user: req.session.name,
+      });
+    } else if (password_check == true) {
+      connection.query(
+        "select * from users where id = ? ",
+        [[[id]]],
+        function (error, results, field) {
+          if (error) {
+            throw error;
+          }
+
+          if (results.length == 0) {
+            res.send(
+              '<script>alert("로그인 후 프로필을 확인하세요.");location.href="/";</script>'
+            );
+          } else {
+            password_check = "YES";
+            console.log(password_check);
+            res.render("profile", {
+              password_check: password_check,
+              userinfo: results[0],
+              user: req.session.name,
+            });
+          }
+        }
+      );
+    }
   }
 });
 
@@ -69,7 +76,7 @@ router.post("/", function (req, res) {
       } else {
         password_check = "NO";
         res.send(
-          "<script>alert('비밀번호가 틀렸습니다!!');history.back();</script>"
+          '<script>alert("로그인 후 프로필을 확인하세요.");location.href="/";</script>'
         );
       }
       res.end();
