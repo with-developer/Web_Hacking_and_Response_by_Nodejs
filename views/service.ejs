@@ -13,7 +13,6 @@
             <%- include ('./include/header.ejs') %>
         </header>
 
-
         <nav class="locationNav">
             <ol>
                 <li><a href="./" title="홈 바로가기"></a></li>
@@ -30,26 +29,53 @@
                     </h3>
                 </div>
             </div>
-            <div class="sub-container" style="margin-bottom: 20px; padding: 50px; max-width: 800px; background-color: #DDDDDD;">
+            <div class="sub-container"
+                style="margin-bottom: 20px; padding: 30px; max-width: 700px; background-color: #DDDDDD;">
                 <div class="content-wrap" style="margin: 30px;">
 
+                    <form action="/service" method="post" style="font-size: 18px;">
+                        <fieldset>
+                            <legend style="text-align: center; font-size: 25px;">예약자 정보</legend>
+                            <div style="text-align: left;margin-left: 37%;">
+                                이름 : <%= userinfo.username %><br>
+                                    아이디 : <%= userinfo.id %><br>
+                                        연락처 : <%= userinfo.phonenumber %><br>
+                            </div>
 
-                    <form action="/service/form" style="font-size: 18px;">
-                        <p><input type="date"></p>
-                        <label><input type="checkbox" name="DigitalCleaning" value="DigitalCleaning"
-                                style="appearance: auto;"> 디지털청소 서비스</label><br>
-                        <label><input type="checkbox" name="PrivacyService" value="PrivacyService"
-                                style="appearance: auto;"> 개인정보 서비스</label><br>
-                        <label><input type="checkbox" name="CleaningSolution" value="CleaningSolution"
-                                style="appearance: auto;"> 청소 솔루션</label><br>
-                        <label><input type="checkbox" name="SmartSystem" value="SmartSystem" style="appearance: auto;">
-                            스마트 시스템</label><br>
-                        <textarea style="width: 700px;"></textarea>
-                        <br><br><br>
-                        <button type="button" class="btn btn-outline-dark"style="font-size: 18px;" type="submit">
+
+                        </fieldset>
+                        <br>
+                        <fieldset name="time">
+                            <legend style="text-align: center; font-size: 25px;">서비스 예약 시간</legend>
+                            <input type="date" id="date" name="date" />
+                        </fieldset>
+                        <br>
+                        <legend style="text-align: center; font-size: 25px;">서비스 선택</legend>
+                        <fieldset name="menu" style="text-align: left; margin-left:37%">
+
+                            <label><input type="checkbox" name="service_1" value="DigitalCleaning" id="service_1"
+                                    style="appearance: auto; "> 디지털청소 서비스</label><br>
+                            <label><input type="checkbox" name="service_2" value="PrivacyService" id="service_2"
+                                    style="appearance: auto;"> 개인정보 서비스</label><br>
+                            <label><input type="checkbox" name="service_3" value="CleaningSolution" id="service_3"
+                                    style="appearance: auto;"> 청소 솔루션</label><br>
+                            <label><input type="checkbox" name="service_4" value="SmartSystem" id="service_4"
+                                    style="appearance: auto;">
+                                스마트 시스템</label><br>
+                            <br>
+
+                        </fieldset>
+
+                        <legend style="text-align: center; font-size: 25px;">요청사항</legend>
+                        <textarea cols="50" rows="5" id="comment" name="comment"></textarea>
+                        <br>
+                        <input type="submit">
+                        <button type="button" class="btn btn-outline-dark" style="font-size: 18px; margin-top: 10px;"
+                            type="submit">
                             신청
                         </button>
                     </form>
+
 
 
                 </div>
