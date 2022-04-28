@@ -10,7 +10,7 @@
 		<meta name="author" content="" />
 		<title>Admin Page</title>
 		<!-- Core theme CSS (includes Bootstrap)-->
-		<link href="../css/styles.css" rel="stylesheet" />
+		<link href="../../css/styles.css" rel="stylesheet" />
 	</head>
 	<body>
 		<div class="d-flex" id="wrapper">
@@ -42,6 +42,89 @@
 				<!-- Page content-->
 				<div class="container-fluid">
 					<h1 class="mt-4">예약 관리</h1>
+                    <div class="content-wrap" style="margin: 30px">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col" class="th-num">번호</th>
+									<th scope="col" class="th-id">아이디</th>
+									<th scope="col" class="th-phonenumber">
+										전화번호
+									</th>
+									<th scope="col" class="th-date">예약 일자</th>
+									<th scope="col" class="th-option1">
+										디지털청소 서비스
+									</th>
+                                    <th scope="col" class="th-option2">
+										개인정보 서비스
+									</th>
+                                    <th scope="col" class="th-option3">
+										청소 솔루션
+									</th>
+                                    <th scope="col" class="th-option4">
+										스마트 서비스
+									</th>
+                                    <th scope="col" class="th-comment">
+										요청사항
+									</th>
+									<th scope="col" class="th-recognize">승인</th>
+                                    <th scope="col" class="th-reject">거절</th>
+								</tr>
+							</thead>
+							<% for(var i=(page * page_num) - page_num; i < (page
+							* page_num); i++) { if(i> length){ i++; }else{ var
+							data = rows[i] %>
+							<tr>
+								<td><%= i + 1 %></td>
+								<td>
+									<a style="float: left"><%= data.id %></a>
+								</td>
+								<td><%= data.phonenumber %></td>
+                                <td><%= data.date %></td>
+								<td><%= data.service_1 %></td>
+								<td><%= data.service_2 %></td>
+								<td><%= data.service_3 %></td>
+								<td><%= data.service_4 %></td>
+                                <td><%= data.comment %></td>
+								<td>
+									<a
+										href="/admin/service/recognize/<%= data._id %>"
+									>
+										<button class="btn btn-dark">
+											승인
+										</button>
+									</a>
+								</td>
+                                <td>
+									<a
+										href="/admin/service/reject/<%= data._id %>"
+									>
+										<button class="btn btn-dark">
+											거절
+										</button>
+									</a>
+								</td>
+							</tr>
+							<% } } %>
+						</table>
+						<div>
+							<br /><br /><br />
+							<ul class="pagination justify-content-center">
+								<% for(var j=0; j < rows.length / page_num;
+								j++){ %>
+								<li class="page-item">
+									<a
+										class="page-link"
+										href="/admin/board/<%= j + 1 %>"
+									>
+										<%= j + 1 %>
+									</a>
+								</li>
+								<% } %>
+							</ul>
+						</div>
+					</div>
+				</div>
 				</div>
 			</div>
 		</div>
