@@ -11,13 +11,12 @@ const connection = mysql.createConnection({
 	database: "vulnnode",
 });
 
-
 router.get("/form_notice", function (req, res, next) {
 	var id = req.session.name;
 
-	if (id === undefined) {
+	if (id !== "admin") {
 		res.send(
-			"<script>alert('로그인 후 게시글을 작성하세요.');history.back();</script>"
+			"<script>alert('공지사항은 관리자만 작성 가능합니다.');history.back();</script>"
 		);
 	} else {
 		res.render("form_notice", { user: req.session.name });
@@ -25,14 +24,13 @@ router.get("/form_notice", function (req, res, next) {
 });
 
 router.post("/form_notice", function (req, res, next) {
-
 	var title = req.body.title;
 	var content = req.body.content;
 	var id = req.session.name;
 
-	if (id === undefined) {
+	if (id !== "admin") {
 		res.send(
-			"<script>alert('로그인 후 게시글을 작성하세요.');history.back();</script>"
+			"<script>alert('공지사항은 관리자만 작성 가능합니다.');history.back();</script>"
 		);
 	} else {
 		connection.query(
@@ -123,10 +121,5 @@ router.get("/page/:page", function (req, res, next) {
 		console.log(rows.length - 1);
 	});
 });
-
-
-
-
-
 
 module.exports = router;
