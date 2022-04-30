@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<%- include ('./include/index_head.ejs') %>
+</head>
+
+<body>
+	<div id="wrap">
+		<header>
+			<!-- main class mainHead -->
+			<%- include ('./include/header.ejs') %>
+		</header>
+		<nav class="locationNav">
+			<ol>
+				<li><a href="./" title="홈 바로가기"></a></li>
+				<li><a href="/profile">마이페이지</a></li>
+			</ol>
+		</nav>
+
+		<section class="subContainer">
+
+			<h2 class="titSub">마이페이지</h2>
+			<div class="subContent" style="text-align: left;">
+				<div style="margin: 30px">
+					<form action="/resetpw" method="post">
+						<div style="width: 800px; height: 440px; background-color: #F2F0F0; margin: 0 auto; outline: 1px ridge rgba(0, 0, 0, 0);
+				border-radius: 2rem; border: 1px solid rgb(0, 0, 0);">
+							<fieldset style="padding-left: 70px;">
+								<div style="margin-top: 60px;">
+									<h4 style="font-size: 40px;">비밀번호 변경</h4>
+
+									<div id="password_wrap" style="margin-top: 70px;">
+										<label style="font-size: 27px;">비밀번호</label>
+										<div id="password_box" class="box_tf">
+
+											<input type="password" name="password" id="password" class="tf_write"
+												style="width: 60%; height: 50px; outline: 1px ridge rgba(0, 0, 0, 0.6); font-size: 20px; padding-left: 15px;">
+										</div>
+										<label style="font-size: 27px;">비밀번호 확인</label>
+										<div id="password_box" class="box_tf">
+
+											<input type="password" name="password" id="password" class="tf_write"
+												style="width: 60%; height: 50px; outline: 1px ridge rgba(0, 0, 0, 0.6); font-size: 20px; padding-left: 15px;">
+										</div>
+										<div class="wrap_emph">
+											<em class="emph_txt" id="password_result"></em>
+										</div>
+									</div>
+								</div>
+
+							</fieldset>
+						</div>
+						<div style="width: fit-content; height: 100px auto; background-color: #F2F0F0; margin: 0 auto; margin-top: 30px;outline: 1px ridge rgba(0, 0, 0, 0);
+					border-radius: 2rem; border: 1px solid rgb(0, 0, 0);">
+							<button type="submit" class="btn"
+								style="font-size: 18px; width: 800px; height: 50px;margin: 0 auto;">
+								변경
+							</button>
+						</div>
+					</form>
+
+
+				</div>
+			</div>
+		</section>
+
+
+
+		<footer>
+			<%- include ('./include/footer.ejs') %>
+		</footer>
+	</div>
+</body>
+
+</html>

@@ -57,67 +57,131 @@
 						</form>
 
 						<% } else if (password_check=="YES" ) { %>
-							<div style="width: 800px; height: 600px; background-color: #F2F0F0; margin: 0 auto; outline: 1px ridge rgba(0, 0, 0, 0);
+							<div id="info">
+								<div style="width: 800px; height: 600px; background-color: #F2F0F0; margin: 0 auto; outline: 1px ridge rgba(0, 0, 0, 0);
 				border-radius: 2rem; border: 1px solid rgb(0, 0, 0);">
-								<fieldset style="padding-left: 70px; padding-right: 70px;">
-									<div style="margin-top: 60px;">
-										<h4 style="font-size: 40px;">기본정보 변경</h4>
-										<p style="font-size: 18px;">기본정보는 휴대폰 변호만 변경 가능합니다.</p>
-										<p style="font-size: 18px;">다른 정보 변경은 여기를 눌러서 요청해주세요.</p>
-										<hr
-											style="border: solid 1px rgb(89, 89, 89); margin-top: 30px; margin-bottom: 15px;">
-										<h4 style="margin-left: 40px; font-size: 24px;">
-											아이디&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<%= user %>
-										</h4>
-										<hr
-											style="border: solid 1px rgb(89, 89, 89); margin-top: 15px; margin-bottom: 15px;">
-										<h4 style="margin-left: 40px; font-size: 24px;">
-											이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<%= userinfo.username %>
-										</h4>
-										<hr
-											style="border: solid 1px rgb(89, 89, 89); margin-top: 15px; margin-bottom: 15px;">
-										<h4 style="margin-left: 40px; font-size: 24px;">
-											비밀번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<fieldset style="padding-left: 70px; padding-right: 70px;">
+										<div style="margin-top: 60px;">
+											<h4 style="font-size: 40px;">기본정보 변경</h4>
+											<p style="font-size: 18px;">기본정보는 휴대폰 변호만 변경 가능합니다.</p>
+											<p style="font-size: 18px;">다른 정보 변경은 여기를 눌러서 요청해주세요.</p>
+											<hr
+												style="border: solid 1px rgb(89, 89, 89); margin-top: 30px; margin-bottom: 15px;">
+											<h4 style="margin-left: 40px; font-size: 24px;">
+												아이디&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<%= user %>
+											</h4>
+											<hr
+												style="border: solid 1px rgb(89, 89, 89); margin-top: 15px; margin-bottom: 15px;">
+											<h4 style="margin-left: 40px; font-size: 24px;">
+												이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<%= userinfo.username %>
+											</h4>
+											<hr
+												style="border: solid 1px rgb(89, 89, 89); margin-top: 15px; margin-bottom: 15px;">
+											<h4 style="margin-left: 40px; font-size: 24px;">
+												비밀번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<button onclick="reset_password()">변경하기</button>
+											</h4>
+											<hr
+												style="border: solid 1px rgb(89, 89, 89); margin-top: 15px; margin-bottom: 15px;">
+											<h4 style="margin-left: 40px; font-size: 24px;">
+												이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<%= userinfo.email %>
+											</h4>
+											<hr
+												style="border: solid 1px rgb(89, 89, 89); margin-top: 15px; margin-bottom: 15px;">
+											<h4 style="margin-left: 40px; font-size: 24px;">
+												전화번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<%= userinfo.phonenumber %> 수정하기
+											</h4>
+
+
+
+										</div>
+
+
+									</fieldset>
+
+								</div>
+								<div style="width: 400px; height: 50px; margin: 0 auto; margin-top:30px">
+									<h3 style="text-align: center;"><a href="/profile/secession">계정 탈퇴하기</a></h3>
+
+								</div>
+							</div>
+
+							<div id="resetpw" style="display: none;">
+								<form action="/profile/resetpw" method="post">
+									<div style="width: 800px; height: 440px; background-color: #F2F0F0; margin: 0 auto; outline: 1px ridge rgba(0, 0, 0, 0);
+						border-radius: 2rem; border: 1px solid rgb(0, 0, 0);">
+										<fieldset style="padding-left: 70px;">
+											<div style="margin-top: 60px;">
+												<h4 style="font-size: 40px;">비밀번호 변경</h4>
+
+												<div id="password_wrap" style="margin-top: 70px;">
+													<label style="font-size: 27px;">비밀번호</label>
+													<div id="password_box" class="box_tf">
+
+														<input type="password" name="password_1" id="password_1"
+															class="tf_write"
+															style="width: 60%; height: 50px; outline: 1px ridge rgba(0, 0, 0, 0.6); font-size: 20px; padding-left: 15px;">
+													</div>
+													<label style="font-size: 27px;">비밀번호 확인</label>
+													<div id="password_box" class="box_tf">
+
+														<input type="password" name="password_2" id="password_2"
+															class="tf_write"
+															style="width: 60%; height: 50px; outline: 1px ridge rgba(0, 0, 0, 0.6); font-size: 20px; padding-left: 15px;">
+													</div>
+													<div class="wrap_emph">
+														<em class="emph_txt" id="password_result"></em>
+													</div>
+												</div>
+											</div>
+
+										</fieldset>
+									</div>
+									<div style="width: fit-content; height: 100px auto; background-color: #F2F0F0; margin: 0 auto; margin-top: 30px;outline: 1px ridge rgba(0, 0, 0, 0);
+							border-radius: 2rem; border: 1px solid rgb(0, 0, 0);">
+										<button type="submit" class="btn"
+											style="font-size: 18px; width: 800px; height: 50px;margin: 0 auto;">
 											변경
-										</h4>
-										<hr
-											style="border: solid 1px rgb(89, 89, 89); margin-top: 15px; margin-bottom: 15px;">
-										<h4 style="margin-left: 40px; font-size: 24px;">
-											이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<%= userinfo.email %>
-										</h4>
-										<hr
-											style="border: solid 1px rgb(89, 89, 89); margin-top: 15px; margin-bottom: 15px;">
-										<h4 style="margin-left: 40px; font-size: 24px;">
-											전화번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<%= userinfo.phonenumber %> 수정하기
-										</h4>
-
-
-
+										</button>
 									</div>
 
 
-								</fieldset>
 
+								</form>
+								<div style="width: fit-content; height: 100px auto; background-color: #F2F0F0; margin: 0 auto; margin-top: 30px;outline: 1px ridge rgba(0, 0, 0, 0);
+							border-radius: 2rem; border: 1px solid rgb(0, 0, 0);">
+									<button onclick="info()"
+										style="font-size: 18px; width: 800px; height: 50px;margin: 0 auto;">
+										뒤로가기
+									</button>
+								</div>
 							</div>
-							<div style="width: 400px; height: 50px; margin: 0 auto; margin-top:30px">
-								<h3 style="text-align: center;"><a href="/profile/secession">계정 탈퇴하기</a></h3>
-
-							</div>
-							<% } %>
 				</div>
+				<% } %>
 			</div>
-		</section>
+	</div>
+	</section>
 
 
 
-		<footer>
-			<%- include ('./include/footer.ejs') %>
-		</footer>
+	<footer>
+		<%- include ('./include/footer.ejs') %>
+	</footer>
 	</div>
 </body>
+<script>
+	function reset_password() {
+		$('#resetpw').show();
+		$('#info').hide();
+	}
+	function info() {
+		$('#resetpw').hide();
+		$('#info').show();
+	}
+</script>
 
 </html>

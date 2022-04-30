@@ -14,7 +14,7 @@ const connection = mysql.createConnection({
 });
 
 router.get("/", (req, res) => {
-  res.render("resetpw", { user: req.session.name });
+  res.render("findPW", { user: req.session.name });
 });
 
 router.post("/", (req, res) => {

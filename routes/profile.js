@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const mysql = require("mysql2");
+const { NULL } = require("mysql/lib/protocol/constants/types");
+
 require("dotenv").config();
 
 const connection = mysql.createConnection({
@@ -76,12 +78,39 @@ router.post("/", function (req, res) {
       } else {
         password_check = "NO";
         res.send(
-          '<script>alert("로그인 후 프로필을 확인하세요.");location.href="/";</script>'
+          '<script>alert("패스워드가 일치하지 않습니다.");location.href="/profile";</script>'
         );
       }
       res.end();
     }
   );
+});
+
+router.post("/resetpw", function (req, res) {
+  let id = req.session.name;
+  let password_1 = req.body.password_1;
+  let password_2 = req.body.password_2;
+  console.log(password_1);
+  if (password_1 != password_2) {
+    res.send(
+      "<script>alert('패스워드가 일치하지 않습니다.');document.location.href='/profile';</script>"
+    );
+  } else if (password_1 == "") {
+    res.send(
+      "<script>alert('패스워드를 입력해주세요.');document.location.href='/profile';</script>"
+    );
+  } else {
+    connection.query(
+      "UPDATE users SET password = ? WHERE id = ?",
+      [password_1, id],
+      function (err, results, fields) {
+        if (err) console.log(err);
+        res.send(
+          "<script>alert('패스워드 변경이 완료되었습니다.');document.location.href='/profile';</script>"
+        );
+      }
+    );
+  }
 });
 
 router.get("/secession", function (req, res) {

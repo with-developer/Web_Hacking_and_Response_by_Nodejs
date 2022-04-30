@@ -29,17 +29,18 @@
                     </h3>
                 </div>
             </div>
-            <div class="sub-container"
-                style="margin-bottom: 20px; padding: 30px; max-width: 700px; background-color: #DDDDDD;">
-                <div class="content-wrap" style="margin: 30px;">
+            <div style="width: 800px; height: 800px; background-color: #F2F0F0; margin: 0 auto; outline: 1px ridge rgba(0, 0, 0, 0);
+            border-radius: 2rem; border: 1px solid rgb(0, 0, 0);">
+                <div class="content-wrap" style="margin: 30px; margin-left: 20%; margin-right: 20%;">
 
                     <form action="/service" method="post" style="font-size: 18px;">
                         <fieldset>
-                            <legend style="text-align: center; font-size: 25px;">예약자 정보</legend>
-                            <div style="text-align: left;margin-left: 37%;">
-                                이름 : <%= userinfo.username %><br>
-                                    아이디 : <%= userinfo.id %><br>
-                                        연락처 : <%= userinfo.phonenumber %><br>
+                            <legend style="text-align: center; font-size: 30px;">예약자 정보</legend>
+                            <hr style="border: solid 1px rgb(89, 89, 89); margin-top: 10px; margin-bottom: 15px;">
+                            <div style="text-align: left;margin-left: 20%; font-size: 25px;">
+                                이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= userinfo.username %><br>
+                                    아이디&nbsp;&nbsp;&nbsp;&nbsp;<%= userinfo.id %><br>
+                                        연락처&nbsp;&nbsp;&nbsp;&nbsp;<%= userinfo.phonenumber %><br>
                             </div>
 
 
@@ -69,9 +70,7 @@
                         <legend style="text-align: center; font-size: 25px;">요청사항</legend>
                         <textarea cols="50" rows="5" id="comment" name="comment"></textarea>
                         <br>
-                        <input type="submit">
-                        <button type="button" class="btn btn-outline-dark" style="font-size: 18px; margin-top: 10px;"
-                            type="submit">
+                        <button type="submit" class="btn btn-outline-dark" style="font-size: 18px; margin-top: 10px;">
                             신청
                         </button>
                     </form>
