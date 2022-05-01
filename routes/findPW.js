@@ -12,6 +12,26 @@ const connection = mysql.createConnection({
   password: process.env.DB_PASSWORD,
   database: "vulnnode",
 });
+const filterStrings = [
+  "CREATE",
+  "INSERT",
+  "UPDATE",
+  "DELETE",
+  "DROP",
+  "ALTER",
+  "create",
+  "insert",
+  "update",
+  "delete",
+  "drop",
+  "alter",
+  "script",
+  "<",
+  ">",
+  "\"",
+  "\'",
+  "\`",
+];
 
 router.get("/", (req, res) => {
   res.render("findPW", { user: req.session.name });
@@ -20,7 +40,24 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   let id = req.body.id;
   let email = req.body.email;
-  if (id && email) {
+  var attack;
+  for (var i = 0; i < filterStrings.length; i++) {
+    if (id.includes(filterStrings[i])) {
+      attack = 1;
+    }
+  }
+  for (var i = 0; i < filterStrings.length; i++) {
+    if (email.includes(filterStrings[i])) {
+      attack = 1;
+    }
+  }
+  if (attack) {
+    res.send(
+      "<script>alert('공격하지마세요!!');history.back(-1);</script>"
+    );
+  }
+
+  else if (id && email) {
     connection.query(
       "SELECT * FROM users WHERE id = ? AND email = ?",
       [id, email],
@@ -53,7 +90,9 @@ router.post("/", (req, res) => {
           };
           transporter.sendMail(emailOptions, res); //전송
         } else {
-          res.send("Username이 맞지 않습니다.");
+          res.send(
+            "<script>alert('정보가 일치하지 않습니다.');history.back(-1);</script>"
+          );
         }
         res.end();
       }

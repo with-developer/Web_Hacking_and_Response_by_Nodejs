@@ -58,11 +58,18 @@ router.post("/form", upload.single("fileupload"), function (req, res, next) {
 	var title = req.body.title;
 	var content = req.body.content;
 	var id = req.session.name;
+	var filename;
+	console.log("filename" + filename);
 	if (id === undefined) {
 		res.send(
 			"<script>alert('로그인 후 게시글을 작성하세요.');history.back();</script>"
 		);
-	} else {
+	} else if (title == '' || content == '' || filename == undefined) {
+		res.send(
+			"<script>alert('내용을 모두 작성하세요.');history.back();</script>"
+		);
+	}
+	else {
 		connection.query(
 			"insert into board (title, content, author, filename) VALUES ?",
 			[[[title, content, id, req.file.filename]]],
