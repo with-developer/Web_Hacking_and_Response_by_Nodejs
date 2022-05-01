@@ -38,7 +38,16 @@ const filterStrings = [
 	"delete",
 	"drop",
 	"alter",
+	"script",
+	"<",
+	">",
+	"\"",
+	"\'",
+	"\`",
 ];
+
+
+
 
 router.get("/", function (req, res) {
 	// 2
@@ -49,20 +58,42 @@ router.post("/", (req, res) => {
 	let id = req.body.id;
 	let password = req.body.password;
 	let attack = 0;
+
+
+
 	for (var i = 0; i < filterStrings.length; i++) {
 		if (password.includes(filterStrings[i])) {
 			attack = 1;
 		}
+
+	}
+	for (var i = 0; i < filterStrings.length; i++) {
+		if (id.includes(filterStrings[i])) {
+			attack = 1;
+		}
 	}
 	if (id && password) {
+
 		if (attack) {
+
 			res.send(
-				"<script>alert('DB테이블 공격하지마세요!!');history.back();</script>"
+				"<script>alert('공격하지마세요!!');history.back();</script>"
 			);
-		} else {
+		}
+
+		else if (id.length >= 13) {
+			res.send(
+				"<script>alert('아이디를 정책에 맞게 입력해주세요');history.go(-1);</script>"
+			);
+		} else if (password.length >= 16) {
+			res.send(
+				"<script>alert('패스워드를 정책에 맞게 입력해주세요');history.go(-1);</script>"
+			);
+		}
+		else {
 			connection.query(
 				"SELECT * FROM users WHERE id = ? AND password = " +
-					`'${password}'`,
+				`'${password}'`,
 				[id, password],
 				function (error, results, fields) {
 					if (results == undefined) {
@@ -89,39 +120,39 @@ router.post("/", (req, res) => {
 
 
 
-router.get('/find_ID', function(req,res){ // 2
-	let code=0;
-	res.render('findID', {user: req.session.name, code: code});
-  });
+router.get('/find_ID', function (req, res) { // 2
+	let code = 0;
+	res.render('findID', { user: req.session.name, code: code });
+});
 
-  router.post('/find_ID', function(req,res){ // 2
+router.post('/find_ID', function (req, res) { // 2
 	let username = req.body.username;
 	let email = req.body.email;
-	console.log("username: "+username);
-	console.log("email:"+email);
+	console.log("username: " + username);
+	console.log("email:" + email);
 	connection.query(
 		"SELECT * from users where username = ? and email = ?",
-	 [username, email], function (err, results) {
-		if (err) console.error("err : " + err);
-		if(results.length==1){
-			console.log(results[0].id)
-			res.render("findID", {
-				code: "success",
-				results_id: results[0].id,
-				results_username: results[0].username,
-				results_email: results[0].email
-			});
-		}else{
-			res.send(
-				"<script>alert('계정이 존재하지 않습니다.');history.back();</script>"
-			);
-		}
-		console.log(results.length);
-		
-	});
+		[username, email], function (err, results) {
+			if (err) console.error("err : " + err);
+			if (results.length == 1) {
+				console.log(results[0].id)
+				res.render("findID", {
+					code: "success",
+					results_id: results[0].id,
+					results_username: results[0].username,
+					results_email: results[0].email
+				});
+			} else {
+				res.send(
+					"<script>alert('계정이 존재하지 않습니다.');history.back();</script>"
+				);
+			}
+			console.log(results.length);
+
+		});
 
 
-  });
+});
 
 
 
