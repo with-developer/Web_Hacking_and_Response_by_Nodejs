@@ -13,17 +13,73 @@ const connection = mysql.createConnection({
 });
 
 router.get("/", function (req, res) {
-  // 2
   res.render("signup", { name: req.query.nameQuery });
 });
 
 router.post("/", (req, res) => {
+  function validatePassword(character) {
+    return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,20}$/.test(character);
+    // 패스워드 검증: 영문,숫자,특수문자로 이루어진 6자리 이상 20자리 미만 패스워드
+  }
+function validateid(character){
+  return /^[a-z]+[a-z0-9]{5,13}$/.test(character);
+}
+
+function validatename(character){
+  return /^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣 ]*$/.test(character);
+}
+
+  function validateemail(character){
+    return  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/.test(character);
+  }
+
+  function validatephonenumber(character){
+    return /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/.test(character);
+  }
+
+
   let id = req.body.id;
   let username = req.body.username;
   let password = req.body.password;
   let repassword = req.body.repassword;
   let email = req.body.email;
   let phoneNumber = req.body.phoneNumber;
+
+
+  if (validateid(id)){
+    validate_id="YES";
+  }else{
+    validate_id="NO";
+  }
+
+  if (validatename(username)){
+    validate_username="YES";
+  }else{
+    validate_username="NO";
+  }
+
+  if (validatePassword(password)) {
+    validate_password="YES";
+  } else {
+    validate_password="NO";
+  }
+
+ if (validateemail(email)){
+  validate_email="YES";
+ }else{
+  validate_email="NO";
+ }
+ 
+ if (validatephonenumber(phoneNumber)){
+  validate_phonenumber="YES";
+ }else{
+  validate_phonenumber="NO";
+ }
+
+  
+
+
+
   if (id && username && password && email && phoneNumber) {
     if (password != repassword) {
       res.send(
@@ -40,13 +96,32 @@ router.post("/", (req, res) => {
       res.send(
         "<script>alert('모든 값을 다 입력해주세요.');history.go(-1);</script>"
       );
-    } else {
+    }else if(validate_id=="NO" || id.length>=13){
+      res.send(
+        "<script>alert('아이디를 정책에 맞게 입력해주세요');history.go(-1);</script>"
+      );
+    }else if(validate_username=="NO" || username.length>=15){
+      res.send(
+        "<script>alert('이름을 정책에 맞게 입력해주세요');history.go(-1);</script>"
+      );
+    }else if(validate_password=="NO" || password.length>=20){
+      res.send(
+        "<script>alert('패스워드를 정책에 맞게 입력해주세요');history.go(-1);</script>"
+      );
+    }
+    else if(validate_email=="NO" || email.length>=20){
+      res.send(
+        "<script>alert('이메일을 정책에 맞게 입력해주세요.');history.go(-1);</script>"
+      );
+    }else if(validate_phonenumber=="NO" || phoneNumber.length>=20){
+      res.send(
+        "<script>alert('전화번호를 정책에 맞게 입력해주세요.');history.go(-1);</script>"
+      );
+    }else {
       connection.query(
         "SELECT * FROM users WHERE id = ?",
         [[id]],
         function (error, results, fields) {
-          console.log("result.length");
-          console.log(results.length);
           if (error) throw error;
           if (results.length >= 1) {
             console.log(results.length);
