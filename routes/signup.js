@@ -55,10 +55,16 @@ const filterXSS = [
   "&#x2F"
 ];
 
+router.get("/policy", function (req, res) {
+  res.render("policy", { name: req.query.nameQuery });
+});
+
 
 router.get("/", function (req, res) {
   res.render("signup", { name: req.query.nameQuery });
 });
+
+
 
 router.post("/", (req, res) => {
   function validatePassword(character) {

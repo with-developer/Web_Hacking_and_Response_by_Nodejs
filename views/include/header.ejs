@@ -67,40 +67,43 @@
         <% if (locals.user) { %>
 
             <div class="rightQuickBox">
-                
-                <div style="margin: 10px;font-size: 20px;font-weight: 300;"><a href="/profile" style="border: 0; font-size: 25px; padding: 0;">
-                    <%= user %>
-                </a>님 반갑습니다.</div>
-            
+
+                <div style="margin: 10px;font-size: 20px;font-weight: 300;"><a href="/profile"
+                        style="border: 0; font-size: 25px; padding: 0;">
+                        <%= user %>
+                    </a>님 반갑습니다.</div>
+
                 <a href="/logout" class="signup" style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
-                    <button type="button" class="btn btn-outline-dark"style="font-size: 18px;">
+                    <button type="button" class="btn btn-outline-dark" style="font-size: 18px;">
                         로그아웃
                     </button>
                 </a>
-                        
-                        
+
+
             </div>
-            
-          
-          <% } else { %>
-          
-            <div class="rightQuickBox">
-                <a href="/login" class="signup" style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
-                    <button type="button" class="btn btn-outline-dark"style="font-size: 18px;">
-                        로그인
-                    </button>
-                </a>
-                        
-                        
-                <a href="/signup" class="signup" style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
-                    <button type="button" class="btn btn-outline-dark"style="font-size: 18px;">
-                        회원가입
-                    </button>
-                </a>
-                
-            </div>
-          
-          <% } %>
-        
+
+
+            <% } else { %>
+
+                <div class="rightQuickBox">
+                    <a href="/login" class="signup"
+                        style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
+                        <button type="button" class="btn btn-outline-dark" style="font-size: 18px;">
+                            로그인
+                        </button>
+                    </a>
+
+
+                    <a href="/signup/policy" class="signup"
+                        style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
+                        <button type="button" class="btn btn-outline-dark" style="font-size: 18px;">
+                            회원가입
+                        </button>
+                    </a>
+
+                </div>
+
+                <% } %>
+
     </nav>
 </div>
