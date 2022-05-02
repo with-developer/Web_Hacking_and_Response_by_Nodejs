@@ -61,32 +61,28 @@ router.post("/form", upload.single("fileupload"), function (req, res, next) {
 	var title = req.body.title;
 	var content = req.body.content;
 	var id = req.session.name;
-	console.log(req.file.mimetype);
+	var filename;
+	console.log("filename" + filename);
 	if (id === undefined) {
 		res.send(
 			"<script>alert('로그인 후 게시글을 작성하세요.');history.back();</script>"
 		);
-	} else {
-		if (
-			req.file.mimetype === "image/jpeg" ||
-			req.file.mimetype === "image/jpg" ||
-			req.file.mimetype === "image/png"
-		) {
-			connection.query(
-				"insert into board (title, content, author, filename) VALUES ?",
-				[[[title, content, id, req.file.filename]]],
-				function (err, results, fields) {
-					if (err) console.log(err);
-					res.send(
-						"<script>alert('글 작성이 완료되었습니다.');document.location.href='/board/page/1';</script>"
-					);
-				}
-			);
-		} else {
-			res.send(
-				"<script>alert('이미지 파일만 업로드 가능합니다.');history.back();</script>"
-			);
-		}
+	} else if (title == '' || content == '') {
+		res.send(
+			"<script>alert('내용을 모두 작성하세요.');history.back();</script>"
+		);
+	}
+	else {
+		connection.query(
+			"insert into board (title, content, author, filename) VALUES ?",
+			[[[title, content, id, req.file.filename]]],
+			function (err, results, fields) {
+				if (err) console.log(err);
+				res.send(
+					"<script>alert('글 작성이 완료되었습니다.');document.location.href='/board/page/1';</script>"
+				);
+			}
+		);
 	}
 });
 

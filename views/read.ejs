@@ -7,11 +7,11 @@
 
 <body>
 
-    <div id="wrap">
-        <header>
-            <!-- main class mainHead -->
-            <%- include ('./include/header.ejs') %>
-        </header>
+	<div id="wrap">
+		<header>
+			<!-- main class mainHead -->
+			<%- include ('./include/header.ejs') %>
+		</header>
 		<nav class="locationNav">
 			<ol>
 				<li><a href="./" title="홈 바로가기"></a></li>
@@ -19,42 +19,42 @@
 			</ol>
 		</nav>
 		<section class="subContainer">
+			<div style="width: 40%; height: auto; background-color: #F2F0F0; margin: 0 auto; margin-bottom: 20px;padding-bottom: 20px; outline: 1px ridge rgba(0, 0, 0, 0);
+			border-radius: 2rem; border: 1px solid rgb(0, 0, 0);">
+				<h2 class="titSub" style="font-size: 60px;">
+					<%=results.title%>
+				</h2>
+				<div class="subContent">
+					<div>
+						<div style="font-size: 15px; text-align: left; padding-left: 10%;">
+							작성자: <%=results.author%> <br>등록일: <%= moment(results.time).format('YYYY년 MM월 DD일 HH시mm분') %>
+						</div>
 
-			<h2 class="titSub">
-				<%=results.title%>
-			</h2>
-			<div class="subContent">
-				<div>
-					<div style="font-size: 15px;">
-						작성자 <%=results.author%> <br>등록일 <%= moment(results.time).format('YY년 MM월 DD일 HH시mm분') %>
 					</div>
-
 				</div>
 			</div>
 			<div class="sub-container">
-				<div class="content-wrap" style="margin: 10px;">
 
-					<table border="1" style="margin-left: 450px;width: 50%; border: 1px solid #dddddd;"
-						class="table table-striped">
+				<div class="content-wrap" style="margin: 10px;">
+					<div style="width: 40%; height: 500px auto; background-color: #F2F0F0; margin: 0 auto; margin-bottom: 20px;padding-bottom: 20px; outline: 1px ridge rgba(0, 0, 0, 0);
+					border-radius: 2rem; border: 1px solid rgb(0, 0, 0);">
 
 						<input type="hidden" name="idx" value="<%=results._id%>" />
-						<thead>
-							<tr>
-								<td>
-									내용
-								</td>
-							</tr>
-						</thead>
-						<tr>
 
-							<td colspan="2" style="height: 200px;">
-								<%-results.content%> <!-- raw input XSS Trigger -->
-							</td>
-						</tr>
-						<tr>
-							<td><a href='/board/download/uploads/images/<%= results.filename%>'><%= results.filename%></td>
-						</tr>
-					</table>
+
+
+						<h3 style="font-size: 20px; text-align: left; padding: 20px;">
+							<%-results.content%>
+						</h3>
+
+						<td><a style="font-size: 20px;" href='/board/download/uploads/images/<%= results.filename%>'>
+								<%= results.filename%>
+							</a>
+						</td>
+
+					</div>
+
+
 					<div style="margin: 30px; margin-right: 75px;">
 						<a href="/board/page/1" class="signup"
 							style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
@@ -77,8 +77,7 @@
 					</div>
 
 
-					<table border="1" style="margin-left: 450px;width: 50%; border: 1px solid #dddddd;"
-						class="table">
+					<table border="1" style="margin-left: 450px;width: 50%; border: 1px solid #dddddd;" class="table">
 						<thead style="background-color: #999;">
 							<tr>
 								<td>
@@ -94,14 +93,30 @@
 							%>
 							<tr>
 								<td style="text-align: left;">
-									<div style="font-size: 13px;">
-									<%= data.author %>
-								</div>
+									<div style="font-size: 20px;">
+										<%= data.content %>
+
+									</div>
 									<br>
 									<br>
-									<%= data.content %>
+									작성자: <%= data.author %>
+										<div style="text-align:right"><a href="#" class="signup"
+												style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
+												<button type="button" class="btn btn-outline-dark"
+													style="font-size: 18px;">
+													수정
+												</button>
+											</a>
+											<a href="#	" class="signup"
+												style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
+												<button type="button" class="btn btn-outline-dark"
+													style="font-size: 18px;">
+													삭제
+												</button>
+											</a>
+										</div>
 								</td>
-								
+
 							</tr>
 							<% } } %>
 
@@ -123,10 +138,10 @@
 							</tr>
 
 						</table>
-							<br>
-							<button type="submit" class="btn btn-outline-dark" style="font-size: 18px; margin-right: 40px;">
-								작성
-							</button>
+						<br>
+						<button type="submit" class="btn btn-outline-dark" style="font-size: 18px; margin-right: 40px;">
+							작성
+						</button>
 					</form>
 				</div>
 			</div>

@@ -12,6 +12,48 @@ const connection = mysql.createConnection({
   password: process.env.DB_PASSWORD,
   database: "vulnnode",
 });
+const filterSQL = [
+  "CREATE",
+  "INSERT",
+  "UPDATE",
+  "DELETE",
+  "DROP",
+  "ALTER",
+  "create",
+  "insert",
+  "update",
+  "delete",
+  "drop",
+  "alter",
+  "\!",
+  "\#",
+  "\$",
+  "\%",
+  "\^",
+  "\&",
+  "&amp",
+  "\*",
+  "\(",
+  "&#40;",
+  "\)",
+  "&#41",
+];
+
+const filterXSS = [
+  "script",
+  "<",
+  "&lt",
+  "&gt",
+  ">",
+  "\"",
+  "&quot",
+  "\'",
+  "&#x27",
+  "\`",
+  "\\",
+  "&#x2F"
+];
+
 
 router.get("/", (req, res) => {
   res.render("findPW", { user: req.session.name });
@@ -20,7 +62,30 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   let id = req.body.id;
   let email = req.body.email;
-  if (id && email) {
+  var attack = 0;
+  for (var i = 0; i < filterSQL.length; i++) {
+    if (id.includes(filterSQL[i])) {
+      attack = 1;
+    }
+    if (email.includes(filterSQL[i])) {
+      attack = 1;
+    }
+  }
+  for (var i = 0; i < filterXSS.length; i++) {
+    if (id.includes(filterXSS[i])) {
+      attack = 1;
+    }
+    if (email.includes(filterXSS[i])) {
+      attack = 1;
+    }
+  }
+  if (attack == 1) {
+    res.send(
+      "<script>alert('공격하지마세요!!');history.back(-1);</script>"
+    );
+  }
+
+  else if (id && email) {
     connection.query(
       "SELECT * FROM users WHERE id = ? AND email = ?",
       [id, email],
@@ -53,7 +118,9 @@ router.post("/", (req, res) => {
           };
           transporter.sendMail(emailOptions, res); //전송
         } else {
-          res.send("Username이 맞지 않습니다.");
+          res.send(
+            "<script>alert('정보가 일치하지 않습니다.');history.back(-1);</script>"
+          );
         }
         res.end();
       }
