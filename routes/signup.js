@@ -44,12 +44,12 @@ const filterXSS = [
 ];
 
 router.get("/policy", function (req, res) {
-  res.render("policy", { name: req.query.nameQuery });
+  res.render("policy", { user: req.session.name });
 });
 
 
 router.get("/", function (req, res) {
-  res.render("signup", { name: req.query.nameQuery });
+  res.render("signup", { user: req.session.name });
 });
 
 
