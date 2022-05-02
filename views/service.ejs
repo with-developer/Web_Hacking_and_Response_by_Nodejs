@@ -5,12 +5,22 @@
     <%- include ('./include/head2.ejs') %>
         <link rel="stylesheet" type="text/css" href="/css/bootstrap/css/bootstrap.css">
         <script src="/css/bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 </head>
 
 <body>
     <div id="wrap">
         <header>
             <%- include ('./include/header.ejs') %>
+                <style>
+                    .ck.ck-editor {
+                        max-width: 100%;
+                    }
+
+                    .ck-editor__editable {
+                        min-height: 200px;
+                    }
+                </style>
         </header>
 
         <nav class="locationNav">
@@ -29,31 +39,44 @@
                     </h3>
                 </div>
             </div>
-            <div style="width: 800px; height: 800px; background-color: #F2F0F0; margin: 0 auto; outline: 1px ridge rgba(0, 0, 0, 0);
-            border-radius: 2rem; border: 1px solid rgb(0, 0, 0);">
-                <div class="content-wrap" style="margin: 30px; margin-left: 20%; margin-right: 20%;">
+            <div style="width: 800px; height: auto; background-color: #ffffff; margin: 0 auto; outline: 1px ridge rgba(0, 0, 0, 0);
+            border: 1px solid rgb(0, 0, 0); margin-bottom: 40px;">
+                <div class="content-wrap" style="margin: 30px; margin-left: 15%; margin-right: 15%;">
 
                     <form action="/service" method="post" style="font-size: 18px;">
                         <fieldset>
-                            <legend style="text-align: center; font-size: 30px;">예약자 정보</legend>
+                            <legend style="text-align: left; font-size: 30px;">예약자 정보</legend>
                             <hr style="border: solid 1px rgb(89, 89, 89); margin-top: 10px; margin-bottom: 15px;">
-                            <div style="text-align: left;margin-left: 20%; font-size: 25px;">
-                                이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= userinfo.username %><br>
-                                    아이디&nbsp;&nbsp;&nbsp;&nbsp;<%= userinfo.id %><br>
-                                        연락처&nbsp;&nbsp;&nbsp;&nbsp;<%= userinfo.phonenumber %><br>
+                            <div style="text-align: left; font-size: 25px;">
+                                이름
+                                <input type="text" name="val" value="<%= userinfo.username %>" disabled />
+                                아이디
+                                <input type="text" name="val" value="<%= userinfo.id %>" disabled />
+                                연락처
+                                <input type="text" name="val" value="<%= userinfo.phonenumber %>" disabled />
+
+                            </div><br>
+
+
+                        </fieldset>
+                        <br>
+                        <fieldset name=" time">
+                            <legend style="text-align: left; font-size: 30px;">서비스 예약</legend>
+                            <hr style="border: solid 1px rgb(89, 89, 89); margin-top: 10px; margin-bottom: 15px;">
+                            <div style="text-align: left; font-size: 25px;">
+                                날짜 선택
+                            </div>
+                            <div style="border: solid 1px rgb(89, 89, 89); width: 35%">
+
+                                <input type="date" id="date" name="date" />
                             </div>
 
-
                         </fieldset>
                         <br>
-                        <fieldset name="time">
-                            <legend style="text-align: center; font-size: 25px;">서비스 예약 시간</legend>
-                            <input type="date" id="date" name="date" />
-                        </fieldset>
-                        <br>
-                        <legend style="text-align: center; font-size: 25px;">서비스 선택</legend>
-                        <fieldset name="menu" style="text-align: left; margin-left:37%">
-
+                        <div style="text-align: left; font-size: 25px;">
+                            서비스 선택
+                        </div>
+                        <div style="text-align: left; font-size: 20px;">
                             <label><input type="checkbox" name="service_1" value="DigitalCleaning" id="service_1"
                                     style="appearance: auto; "> 디지털청소 서비스</label><br>
                             <label><input type="checkbox" name="service_2" value="PrivacyService" id="service_2"
@@ -64,11 +87,18 @@
                                     style="appearance: auto;">
                                 스마트 시스템</label><br>
                             <br>
+                        </div>
+
+
+                        <fieldset name="menu" style="text-align: left; margin-left:37%">
+
+
 
                         </fieldset>
 
-                        <legend style="text-align: center; font-size: 25px;">요청사항</legend>
-                        <textarea cols="50" rows="5" id="comment" name="comment"></textarea>
+                        <legend style="text-align: left; font-size: 25px;">요청사항</legend>
+                        <textarea name="content" class="form-control" id="classic" cols="200" rows="5"
+                            style="height: 400px" placeholder="내용을 입력해주세요."></textarea>
                         <br>
                         <button type="submit" class="btn btn-outline-dark" style="font-size: 18px; margin-top: 10px;">
                             신청
@@ -103,5 +133,12 @@
 
     </div>
 </body>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#classic'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 
 </html>
