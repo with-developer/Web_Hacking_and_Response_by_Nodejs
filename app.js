@@ -9,18 +9,18 @@ const ejs = require("ejs");
 const moment = require("moment");
 
 const options = {
-	key: fs.readFileSync("fake_keys/key.pem"),
-	cert: fs.readFileSync("fake_keys/cert.pem"),
+  key: fs.readFileSync("fake_keys/key.pem"),
+  cert: fs.readFileSync("fake_keys/cert.pem"),
 };
 
 const app = express();
 
 app.use(
-	session({
-		secret: "secretkey",
-		resave: false,
-		saveUninitialized: true,
-	})
+  session({
+    secret: "secretkey",
+    resave: false,
+    saveUninitialized: true,
+  })
 );
 
 
@@ -38,6 +38,7 @@ const pageRouter = require("./routes/board");
 const serviceRouter = require("./routes/service");
 const adminRouter = require("./routes/admin");
 const findPWRouter = require("./routes/findPW");
+const termsRouter = require("./routes/terms");
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
@@ -62,3 +63,4 @@ app.use("/board", pageRouter);
 app.use("/service", serviceRouter);
 app.use("/admin", adminRouter);
 app.use("/findPW", findPWRouter);
+app.use("/terms", termsRouter);
