@@ -64,7 +64,7 @@ router.post("/form", upload.single("fileupload"), function (req, res, next) {
 		res.send(
 			"<script>alert('로그인 후 게시글을 작성하세요.');history.back();</script>"
 		);
-	} else if (title == '' || content == '' || filename == undefined) {
+	} else if (title == '' || content == '') {
 		res.send(
 			"<script>alert('내용을 모두 작성하세요.');history.back();</script>"
 		);

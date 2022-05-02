@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 });
 
 
-const filterStrings = [
+const filterSQL = [
   "CREATE",
   "INSERT",
   "UPDATE",
@@ -26,12 +26,33 @@ const filterStrings = [
   "delete",
   "drop",
   "alter",
+  "\!",
+  "\#",
+  "\$",
+  "\%",
+  "\^",
+  "\&",
+  "&amp",
+  "\*",
+  "\(",
+  "&#40;",
+  "\)",
+  "&#41",
+];
+
+const filterXSS = [
   "script",
   "<",
+  "&lt",
+  "&gt",
   ">",
   "\"",
+  "&quot",
   "\'",
+  "&#x27",
   "\`",
+  "\\",
+  "&#x2F"
 ];
 
 
@@ -67,7 +88,7 @@ router.post("/", (req, res) => {
   let repassword = req.body.repassword;
   let email = req.body.email;
   let phoneNumber = req.body.phoneNumber;
-
+  attack = 0;
 
   if (validateid(id)) {
     validate_id = "YES";
@@ -99,40 +120,52 @@ router.post("/", (req, res) => {
     validate_phonenumber = "NO";
   }
 
-  for (var i = 0; i < filterStrings.length; i++) {
-    if (username.includes(filterStrings[i])) {
+  for (var i = 0; i < filterSQL.length; i++) {
+    if (username.includes(filterSQL[i])) {
+      attack = 1;
+    }
+    if (id.includes(filterSQL[i])) {
+      attack = 1;
+    }
+    if (password.includes(filterSQL[i])) {
+      attack = 1;
+    }
+    if (repassword.includes(filterSQL[i])) {
+      attack = 1;
+    }
+    if (email.includes(filterSQL[i])) {
+      attack = 1;
+    }
+    if (phoneNumber.includes(filterSQL[i])) {
       attack = 1;
     }
   }
-  for (var i = 0; i < filterStrings.length; i++) {
-    if (id.includes(filterStrings[i])) {
+
+  for (var i = 0; i < filterXSS.length; i++) {
+    if (username.includes(filterXSS[i])) {
+      attack = 1;
+    }
+    if (id.includes(filterXSS[i])) {
+      attack = 1;
+    }
+    if (password.includes(filterXSS[i])) {
+      attack = 1;
+    }
+    if (repassword.includes(filterXSS[i])) {
+      attack = 1;
+    }
+    if (email.includes(filterXSS[i])) {
+      attack = 1;
+    }
+    if (phoneNumber.includes(filterXSS[i])) {
       attack = 1;
     }
   }
-  for (var i = 0; i < filterStrings.length; i++) {
-    if (password.includes(filterStrings[i])) {
-      attack = 1;
-    }
-  }
-  for (var i = 0; i < filterStrings.length; i++) {
-    if (repassword.includes(filterStrings[i])) {
-      attack = 1;
-    }
-  }
-  for (var i = 0; i < filterStrings.length; i++) {
-    if (email.includes(filterStrings[i])) {
-      attack = 1;
-    }
-  }
-  for (var i = 0; i < filterStrings.length; i++) {
-    if (phoneNumber.includes(filterStrings[i])) {
-      attack = 1;
-    }
-  }
+
 
 
   if (id && username && password && email && phoneNumber) {
-    if (attack) {
+    if (attack == 1) {
 
       res.send(
         "<script>alert('공격하지마세요!!');history.back(-1);</script>"

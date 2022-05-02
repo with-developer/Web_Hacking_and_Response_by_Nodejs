@@ -25,7 +25,7 @@ app.use(
 	})
 );
 
-const filterStrings = [
+const filterSQL = [
 	"CREATE",
 	"INSERT",
 	"UPDATE",
@@ -38,12 +38,33 @@ const filterStrings = [
 	"delete",
 	"drop",
 	"alter",
+	"\!",
+	"\#",
+	"\$",
+	"\%",
+	"\^",
+	"\&",
+	"&amp",
+	"\*",
+	"\(",
+	"&#40;",
+	"\)",
+	"&#41",
+];
+
+const filterXSS = [
 	"script",
 	"<",
+	"&lt",
+	"&gt",
 	">",
 	"\"",
+	"&quot",
 	"\'",
+	"&#x27",
 	"\`",
+	"\\",
+	"&#x2F"
 ];
 
 
@@ -61,20 +82,26 @@ router.post("/", (req, res) => {
 
 
 
-	for (var i = 0; i < filterStrings.length; i++) {
-		if (password.includes(filterStrings[i])) {
+	for (var i = 0; i < filterSQL.length; i++) {
+		if (password.includes(filterSQL[i])) {
+			attack = 1;
+		}
+		if (id.includes(filterSQL[i])) {
 			attack = 1;
 		}
 
 	}
-	for (var i = 0; i < filterStrings.length; i++) {
-		if (id.includes(filterStrings[i])) {
+	for (var i = 0; i < filterXSS.length; i++) {
+		if (password.includes(filterXSS[i])) {
+			attack = 1;
+		}
+		if (id.includes(filterXSS[i])) {
 			attack = 1;
 		}
 	}
 	if (id && password) {
 
-		if (attack) {
+		if (attack == 1) {
 
 			res.send(
 				"<script>alert('공격하지마세요!!');history.back();</script>"
@@ -128,30 +155,55 @@ router.get('/find_ID', function (req, res) { // 2
 router.post('/find_ID', function (req, res) { // 2
 	let username = req.body.username;
 	let email = req.body.email;
+	attack = 0;
 	console.log("username: " + username);
 	console.log("email:" + email);
-	connection.query(
-		"SELECT * from users where username = ? and email = ?",
-		[username, email], function (err, results) {
-			if (err) console.error("err : " + err);
-			if (results.length == 1) {
-				console.log(results[0].id)
-				res.render("findID", {
-					code: "success",
-					results_id: results[0].id,
-					results_username: results[0].username,
-					results_email: results[0].email
-				});
-			} else {
-				res.send(
-					"<script>alert('계정이 존재하지 않습니다.');history.back();</script>"
-				);
-			}
-			console.log(results.length);
 
-		});
+	for (var i = 0; i < filterSQL.length; i++) {
+		if (username.includes(filterSQL[i])) {
+			attack = 1;
+		}
+		if (email.includes(filterSQL[i])) {
+			attack = 1;
+		}
+	}
+	for (var i = 0; i < filterXSS.length; i++) {
+		if (username.includes(filterXSS[i])) {
+			attack = 1;
+		}
+		if (email.includes(filterXSS[i])) {
+			attack = 1;
+		}
+	}
+	if (attack == 1) {
 
+		res.send(
+			"<script>alert('공격하지마세요!!');history.back(-1);</script>"
+		);
+	} else {
 
+		connection.query(
+			"SELECT * from users where username = ? and email = ?",
+			[username, email], function (err, results) {
+				if (err) console.error("err : " + err);
+				if (results.length >= 1) {
+					console.log(results[0].id)
+					res.render("findID", {
+						code: "success",
+						results_id: results[0].id,
+						results_username: results[0].username,
+						results_email: results[0].email
+					});
+				} else {
+					res.send(
+						"<script>alert('계정이 존재하지 않습니다.');history.back();</script>"
+					);
+				}
+				console.log(results.length);
+
+			});
+
+	}
 });
 
 
