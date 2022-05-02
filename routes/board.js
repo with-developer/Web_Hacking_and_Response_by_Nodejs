@@ -47,8 +47,10 @@ const uploadFilter = function (req, file, cb) {
 var upload = multer({
 	storage: storage,
 	limits: { fileSize: 10 * 1024 * 1024 }, //10MB
+
 	fileFilter: uploadFilter,
 }).single("fileupload");
+
 
 router.get("/form", function (req, res, next) {
 	var id = req.session.name;

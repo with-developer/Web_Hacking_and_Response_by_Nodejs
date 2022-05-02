@@ -1,76 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<%- include ('./include/head.ejs') %>
-	</head>
 
-	<body>
-		<header><%- include ('./include/header.ejs') %></header>
+<head>
+	<%- include ('./include/head.ejs') %>
+		<!-- 클래식 에디터 -->
+		<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+		<title>Home</title>
 
-		<form
-			id="Form"
-			action="/notice/form_notice"
-			method="post"
-			style="margin-top: 100px; margin-right: 400px; margin-left: 300px"
-		>
-			<table
-				width="400"
-				class="table table-striped"
-				style="text-align: center; border: 1px solid #dddddd"
-			>
-				<thead>
-					<tr>
-						<th
-							colspan="2"
-							style="
+		<!-- 넓이 높이 조절 -->
+		<style>
+			.ck.ck-editor {
+				max-width: 100%;
+			}
+
+			.ck-editor__editable {
+				min-height: 400px;
+			}
+		</style>
+
+</head>
+
+<body>
+	<header>
+		<%- include ('./include/header.ejs') %>
+	</header>
+
+	<form id="Form" action="/notice/form_notice" method="post"
+		style="margin-top: 100px; margin-right: 400px; margin-left: 300px" enctype="multipart/form-data">
+		<table width="400" class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+			<thead>
+				<tr>
+					<th colspan="2" style="
 								background-color: #eeeeee;
 								text-align: center;
-							"
-						>
-							공지사항 작성
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<input
-								type="text"
-								class="form-control"
-								name="title"
-								id="title"
-								size="10"
-								maxLength="50"
-								placeholder="제목을 입력해주세요."
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea
-								name="content"
-								class="form-control"
-								id="content"
-								cols="200"
-								rows="5"
-								style="height: 400px"
-								placeholder="내용을 입력해주세요."
-							></textarea>
-						</td>
-					</tr>
-				</tbody>
+							">
+						게시물 작성
+					</th>
+				</tr>
+			</thead>
+			<tbody>
 				<tr>
 					<td>
-						<input
-							type="submit"
-							class="btn btn-primary pull-right"
-							value="글쓰기"
-						/>
+						<input type="text" class="form-control" name="title" id="title" size="10" maxLength="50"
+							placeholder="제목을 입력해주세요." />
 					</td>
 				</tr>
-			</table>
-		</form>
+				<tr>
+					<td>
+						<textarea name="content" class="form-control" id="classic" cols="200" rows="5"
+							style="height: 400px" placeholder="내용을 입력해주세요."></textarea>
+					</td>
 
-		<footer><%- include ('./include/footer.ejs') %></footer>
-	</body>
+
+				</tr>
+				<tr>
+					<td>
+						<input type="file" class="form-control-file" id="fileupload" name="fileupload" required></input>
+					</td>
+				</tr>
+			</tbody>
+			<tr>
+				<td>
+					<input type="submit" class="btn btn-primary pull-right" value="글쓰기" />
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<footer>
+		<%- include ('./include/footer.ejs') %>
+	</footer>
+</body>
+<script>
+	ClassicEditor
+		.create(document.querySelector('#classic'))
+		.catch(error => {
+			console.error(error);
+		});
+</script>
+
 </html>
