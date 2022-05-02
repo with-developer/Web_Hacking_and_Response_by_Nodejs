@@ -25,19 +25,7 @@ const filterSQL = [
   "update",
   "delete",
   "drop",
-  "alter",
-  "\!",
-  "\#",
-  "\$",
-  "\%",
-  "\^",
-  "\&",
-  "&amp",
-  "\*",
-  "\(",
-  "&#40;",
-  "\)",
-  "&#41",
+  "alter"
 ];
 
 const filterXSS = [
