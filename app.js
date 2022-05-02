@@ -9,18 +9,18 @@ const ejs = require("ejs");
 const moment = require("moment");
 
 const options = {
-  key: fs.readFileSync("fake_keys/key.pem"),
-  cert: fs.readFileSync("fake_keys/cert.pem"),
+	key: fs.readFileSync("fake_keys/key.pem"),
+	cert: fs.readFileSync("fake_keys/cert.pem"),
 };
 
 const app = express();
 
 app.use(
-  session({
-    secret: "secretkey",
-    resave: false,
-    saveUninitialized: true,
-  })
+	session({
+		secret: "secretkey",
+		resave: false,
+		saveUninitialized: true,
+	})
 );
 
 

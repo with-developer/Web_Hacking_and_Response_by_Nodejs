@@ -41,7 +41,10 @@ var storage = multer.diskStorage({
 	},
 });
 
-var upload = multer({ storage: storage });
+var upload = multer({
+	storage: storage,
+	limits: { fileSize: 10 * 1024 * 1024 }, //10MB
+});
 router.get("/form", function (req, res, next) {
 	var id = req.session.name;
 
