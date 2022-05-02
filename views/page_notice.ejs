@@ -52,8 +52,10 @@
                                 <td>
                                     <%= data._id %>
                                 </td>
-                                <td><a style="float:left" href="/notice/read/<%= data._id %>"><%= data.title %></a>
-                                    
+                                <td><a style="float:left" href="/notice/read/<%= data._id %>">
+                                        <%= data.title %>
+                                    </a>
+
                                 </td>
                                 <td>
                                     <%= data.author %>
@@ -64,8 +66,14 @@
                             </tr>
                             <% } } %>
                     </table>
+
                     <div style="float:right; margin-right:30px;">
-                        <a class="btn btn-secondary" href="/notice/form_notice" style="font-size: 15px; margin: 15px;">글쓰기</a>
+                        <% if (user=="admin" ) { %>
+                            <a class="btn btn-secondary" href="/notice/form_notice"
+                                style="font-size: 15px; margin: 15px;">글쓰기</a>
+                            <% } %>
+
+
                     </div>
                     <div>
                         <br><br><br>

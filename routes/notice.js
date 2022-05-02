@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const moment = require("moment");
 const mysql = require("mysql2");
+const moment = require("moment");
+const multer = require("multer");
+const { urlencoded } = require("express");
+const fs = require("fs");
+
 require("dotenv").config();
 
 const connection = mysql.createConnection({
@@ -10,6 +14,39 @@ const connection = mysql.createConnection({
 	password: process.env.DB_PASSWORD,
 	database: "vulnnode",
 });
+
+
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		//파일이 이미지 파일이면
+		if (
+			file.mimetype == "image/jpeg" ||
+			file.mimetype == "image/jpg" ||
+			file.mimetype == "image/png"
+		) {
+			console.log("이미지 파일이네요");
+			cb(null, "uploads/images");
+			//텍스트 파일이면
+		} else if (
+			file.mimetype == "application/pdf" ||
+			file.mimetype == "application/txt" ||
+			file.mimetype == "application/octet-stream"
+		) {
+			console.log("텍스트 파일이네요");
+			cb(null, "uploads/texts");
+		}
+	},
+	//파일이름 설정
+	filename: function (req, file, cb) {
+		cb(null, Date.now() + "-" + file.originalname);
+	},
+});
+
+var upload = multer({
+	storage: storage,
+	limits: { fileSize: 10 * 1024 * 1024 }, //10MB
+});
+
 
 router.get("/form_notice", function (req, res, next) {
 	var id = req.session.name;
@@ -23,10 +60,12 @@ router.get("/form_notice", function (req, res, next) {
 	}
 });
 
-router.post("/form_notice", function (req, res, next) {
+router.post("/form_notice", upload.single("fileupload"), function (req, res, next) {
 	var title = req.body.title;
 	var content = req.body.content;
 	var id = req.session.name;
+	var filename;
+	console.log("filename" + filename);
 
 	if (id !== "admin") {
 		res.send(
@@ -34,8 +73,8 @@ router.post("/form_notice", function (req, res, next) {
 		);
 	} else {
 		connection.query(
-			"insert into notice (title, content, author) VALUES ?",
-			[[[title, content, id]]],
+			"insert into notice (title, content, author, filename) VALUES ?",
+			[[[title, content, id, req.file.filename]]],
 			function (err, results, fields) {
 				if (err) console.log(err);
 				res.send(
@@ -44,6 +83,16 @@ router.post("/form_notice", function (req, res, next) {
 			}
 		);
 	}
+});
+
+
+router.get("/download/uploads/images/:name", function (req, res) {
+	var filename = req.params.name;
+	console.log(req.params.name);
+	console.log(filename);
+	var file = __dirname + "/../uploads/images/" + decodeURIComponent(filename);
+	console.log(file);
+	res.download(file);
 });
 
 router.post("/comment_form_notice/:idx", function (req, res, next) {
@@ -94,6 +143,7 @@ router.get("/read/:idx", function (req, res, next) {
 				user: req.session.name,
 				comment_results: comment_results,
 				length: comment_results.length - 1,
+				moment
 			}); // 첫번째행 한개의데이터만 랜더링 요청
 		});
 	});

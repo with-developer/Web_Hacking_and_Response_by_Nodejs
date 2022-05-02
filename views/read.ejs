@@ -19,8 +19,8 @@
 			</ol>
 		</nav>
 		<section class="subContainer">
-			<div style="width: 40%; height: auto; background-color: #F2F0F0; margin: 0 auto; margin-bottom: 20px;padding-bottom: 20px; outline: 1px ridge rgba(0, 0, 0, 0);
-			border-radius: 2rem; border: 1px solid rgb(0, 0, 0);">
+			<div
+				style="width: 60%; height: auto; background-color: #ffffff; margin: 0 auto; margin-bottom: 20px;padding-bottom: 20px; outline: 1px ridge rgba(0, 0, 0, 0); border: 2px solid rgb(0, 0, 0);">
 				<h2 class="titSub" style="font-size: 60px;">
 					<%=results.title%>
 				</h2>
@@ -36,8 +36,8 @@
 			<div class="sub-container">
 
 				<div class="content-wrap" style="margin: 10px;">
-					<div style="width: 40%; height: 500px auto; background-color: #F2F0F0; margin: 0 auto; margin-bottom: 20px;padding-bottom: 20px; outline: 1px ridge rgba(0, 0, 0, 0);
-					border-radius: 2rem; border: 1px solid rgb(0, 0, 0);">
+					<div style="width: 60%; height: 500px auto; background-color: #ffffff; margin: 0 auto; margin-bottom: 20px;padding-bottom: 20px; outline: 1px ridge rgba(0, 0, 0, 0);
+					 border: 1px solid rgb(0, 0, 0);">
 
 						<input type="hidden" name="idx" value="<%=results._id%>" />
 
@@ -46,7 +46,8 @@
 						<h3 style="font-size: 20px; text-align: left; padding: 20px;">
 							<%-results.content%>
 						</h3>
-
+						<hr
+							style="border: solid 1px rgb(89, 89, 89); margin:30px;margin-top: 30px; margin-bottom: 15px; ">
 						<td><a style="font-size: 20px;" href='/board/download/uploads/images/<%= results.filename%>'>
 								<%= results.filename%>
 							</a>
@@ -76,73 +77,89 @@
 						</a>
 					</div>
 
-
-					<table border="1" style="margin-left: 450px;width: 50%; border: 1px solid #dddddd;" class="table">
-						<thead style="background-color: #999;">
-							<tr>
-								<td>
-									댓글
-								</td>
-							</tr>
-						</thead>
-
-						<% for(var i=0; i < length+1; i++) { if(i> length){
-							i++;
-							}else{
-							var data = comment_results[i]
-							%>
-							<tr>
-								<td style="text-align: left;">
-									<div style="font-size: 20px;">
-										<%= data.content %>
-
-									</div>
-									<br>
-									<br>
-									작성자: <%= data.author %>
-										<div style="text-align:right"><a href="#" class="signup"
-												style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
-												<button type="button" class="btn btn-outline-dark"
-													style="font-size: 18px;">
-													수정
-												</button>
-											</a>
-											<a href="#	" class="signup"
-												style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
-												<button type="button" class="btn btn-outline-dark"
-													style="font-size: 18px;">
-													삭제
-												</button>
-											</a>
-										</div>
-								</td>
-
-							</tr>
-							<% } } %>
-
-					</table>
-
-					<form action="/board/comment_form/<%=results._id%>" method="post">
-						<table border="1"
-							style="margin-top:40px; margin-left: 450px;width: 50%; text-align: center; border: 1px solid #dddddd; font-size: 15px;">
-							<thead>
+					<div style="width: 60%; height: auto; background-color: #ffffff; margin: 0 auto; margin-bottom: 20px; outline: 1px ridge rgba(0, 0, 0, 0);
+					 border: 1px solid rgb(0, 0, 0);">
+						<table border="1" style="width: 100%; height: auto; border: 1px solid #dddddd;" class="table">
+							<thead style="background-color: rgb(255, 255, 255);">
 								<tr>
-									<th colspan="2" style="background-color: #eeeeee; text-align: center;">
-										댓글 작성
-									</th>
+									<td>
+										<p style="font-size: 20px;">
+										<h3>댓글</h3>
+										</p>
+									</td>
 								</tr>
 							</thead>
-							<td>
-								<textarea name="content" id="content" cols="30" rows="4" required></textarea>
-							</td>
-							</tr>
+
+							<% for(var i=0; i < length+1; i++) { if(i> length){
+								i++;
+								}else{
+								var data = comment_results[i]
+								%>
+								<tr>
+									<td style="text-align: left;">
+										<div style="font-size: 20px;">
+											<%= data.content %>
+
+										</div>
+										<br>
+										<br>
+										<div style="float:left; width: 100%;">
+											작성자: <%= data.author %>
+
+												<div style="text-align:right;float:right;"><a href="#" class="signup"
+														style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
+														<button type="button" class="btn btn-outline-dark"
+															style="font-size: 18px;">
+															수정
+														</button>
+													</a>
+													<a href="#	" class="signup"
+														style="border: 0px; font-size: 20px; margin-left: 20px; color: #333;">
+														<button type="button" class="btn btn-outline-dark"
+															style="font-size: 18px;">
+															삭제
+														</button>
+													</a>
+												</div>
+										</div>
+									</td>
+
+								</tr>
+								<% } } %>
 
 						</table>
-						<br>
-						<button type="submit" class="btn btn-outline-dark" style="font-size: 18px; margin-right: 40px;">
+					</div>
+					<div style="width: 60%; height: auto; background-color: #ffffff; margin: 0 auto; margin-bottom: 20px; outline: 1px ridge rgba(0, 0, 0, 0);
+					border: 1px solid rgb(0, 0, 0);">
+						<form action="/board/comment_form/<%=results._id%>" method="post">
+							<table border="1"
+								style="width: 100%; text-align: center; border: 1px solid #dddddd; font-size: 15px;">
+								<thead style="background-color: rgb(255, 255, 255);">
+									<tr>
+										<td>
+											<p style="font-size: 20px;">
+											<h3>댓글작성</h3>
+											</p>
+										</td>
+									</tr>
+								</thead>
+								<tr>
+									<td>
+										<textarea name="content" id="content" cols="30" rows="4" required></textarea>
+									</td>
+								</tr>
+
+							</table>
+							<br>
+
+					</div>
+					<div
+						style="width: 60%; height: auto; background-color: #ffffff; margin: 0 auto; margin-bottom: 20px; outline: 1px ridge rgba(0, 0, 0, 0);">
+						<button type="submit" class="btn btn-outline-dark" style="font-size: 18px;">
 							작성
 						</button>
-					</form>
+						</form>
+					</div>
 				</div>
 			</div>
 		</section>
