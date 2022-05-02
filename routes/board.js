@@ -15,24 +15,20 @@ const connection = mysql.createConnection({
 	database: "vulnnode",
 });
 
+const SUPPORTED_FILES = ["image/png", "image/jpg", "image/jpeg", "image/gif"];
+
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		//파일이 이미지 파일이면
 		if (
 			file.mimetype == "image/jpeg" ||
 			file.mimetype == "image/jpg" ||
-			file.mimetype == "image/png"
+			file.mimetype == "image/png" ||
+			file.mimetype == "image/gif"
 		) {
 			console.log("이미지 파일이네요");
 			cb(null, "uploads/images");
 			//텍스트 파일이면
-		} else if (
-			file.mimetype == "application/pdf" ||
-			file.mimetype == "application/txt" ||
-			file.mimetype == "application/octet-stream"
-		) {
-			console.log("텍스트 파일이네요");
-			cb(null, "uploads/texts");
 		}
 	},
 	//파일이름 설정
@@ -41,10 +37,20 @@ var storage = multer.diskStorage({
 	},
 });
 
+const uploadFilter = function (req, file, cb) {
+	if (!SUPPORTED_FILES.includes(file.mimetype)) {
+		return cb(new TypeError("이미지 파일만 업로드 가능합니다."));
+	}
+	cb(null, true);
+};
+
 var upload = multer({
 	storage: storage,
 	limits: { fileSize: 10 * 1024 * 1024 }, //10MB
-});
+
+	fileFilter: uploadFilter,
+}).single("fileupload");
+
 
 router.get("/form", function (req, res, next) {
 	var id = req.session.name;
@@ -58,31 +64,35 @@ router.get("/form", function (req, res, next) {
 	}
 });
 
-router.post("/form", upload.single("fileupload"), function (req, res, next) {
-	var title = req.body.title;
-	var content = req.body.content;
-	var id = req.session.name;
-	var filename;
-	console.log("filename" + filename);
-	if (id === undefined) {
+router.post("/form", upload, function (req, res, next) {
+	try {
+		var title = req.body.title;
+		var content = req.body.content;
+		var id = req.session.name;
+
+		if (id === undefined) {
+			res.send(
+				"<script>alert('로그인 후 게시글을 작성하세요.');history.back();</script>"
+			);
+		} else if (title == "" || content == "") {
+			res.send(
+				"<script>alert('내용을 모두 작성하세요.');history.back();</script>"
+			);
+		} else {
+			connection.query(
+				"insert into board (title, content, author, filename) VALUES ?",
+				[[[title, content, id, req.file.filename]]],
+				function (err, results, fields) {
+					if (err) console.log(err);
+					res.send(
+						"<script>alert('글 작성이 완료되었습니다.');document.location.href='/board/page/1';</script>"
+					);
+				}
+			);
+		}
+	} catch (error) {
 		res.send(
-			"<script>alert('로그인 후 게시글을 작성하세요.');history.back();</script>"
-		);
-	} else if (title == '' || content == '') {
-		res.send(
-			"<script>alert('내용을 모두 작성하세요.');history.back();</script>"
-		);
-	}
-	else {
-		connection.query(
-			"insert into board (title, content, author, filename) VALUES ?",
-			[[[title, content, id, req.file.filename]]],
-			function (err, results, fields) {
-				if (err) console.log(err);
-				res.send(
-					"<script>alert('글 작성이 완료되었습니다.');document.location.href='/board/page/1';</script>"
-				);
-			}
+			"<script>alert('이미지 파일만 업로드 가능합니다.');history.back();</script>"
 		);
 	}
 });
