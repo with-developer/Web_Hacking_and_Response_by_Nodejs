@@ -188,12 +188,12 @@ router.post("/", (req, res) => {
       res.send(
         "<script>alert('이름을 정책에 맞게 입력해주세요');history.go(-1);</script>"
       );
-    } else if (validate_password == "NO" || password.length >= 16) {
+    } else if (validate_password == "NO" || password.length >= 30) {
       res.send(
         "<script>alert('패스워드를 정책에 맞게 입력해주세요');history.go(-1);</script>"
       );
     }
-    else if (validate_email == "NO" || email.length >= 16) {
+    else if (validate_email == "NO" || email.length >= 30) {
       res.send(
         "<script>alert('이메일을 정책에 맞게 입력해주세요.');history.go(-1);</script>"
       );
