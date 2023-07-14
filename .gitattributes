@@ -1,5 +1,4 @@
 *.css linguist-detectable=false
 *.scss linguist-detectable=false
 *.html linguist-detectable=false
-
-public/js/* linguist-vendored=false
+public/js/jquery-3.5.1.js linguist-vendored
